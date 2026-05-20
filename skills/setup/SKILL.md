@@ -38,7 +38,13 @@ Upload-Post groups social accounts under **profiles** (one workspace can have ma
 
 Almost every upload, analytics, comment, and DM tool takes a `user` parameter set to one of these profile usernames. If the user has only one profile, default to it silently. If they have several, ask which one to use before running anything that writes.
 
-If `list_users` returns an empty list or no profile has any connected platform, hand off to the `connect-accounts` skill rather than guiding them through OAuth here.
+If `list_users` returns an empty list, or no profile has any connected platform, tell the user to do it from the web in 30 seconds:
+
+```
+https://app.upload-post.com/manage-users
+```
+
+There they create a profile, click each platform they want to post to, and accept the OAuth prompt. A couple of clicks per network. Do not run the `whitelabel-connect` skill in this case — that is for generating connection URLs for clients in a white-label / agency setup, not for connecting the user's own accounts.
 
 ## Wrap-up
 

@@ -13,7 +13,7 @@ The Upload-Post plugin connects Claude Code to the [Upload-Post MCP server](http
 | Skill | What it does |
 | :---- | :----------- |
 | `/upload-post:setup` | One-time onboarding. Verifies the API key, the MCP connection, and that you have at least one social account linked. |
-| `/upload-post:connect-accounts` | Walks you through connecting Instagram, TikTok, YouTube, X, LinkedIn, Facebook, Threads, Pinterest, Reddit, Bluesky, or Snapchat via OAuth. |
+| `/upload-post:whitelabel-connect` | Generate a JWT connection link so a client or end-user can OAuth their socials into a profile inside your workspace — for white-label embeds and agency onboarding. (Connecting your own accounts? Use [app.upload-post.com/manage-users](https://app.upload-post.com/manage-users) — a couple of clicks per network.) |
 | `/upload-post:schedule-campaign` | Schedule a post across multiple platforms at once. Handles per-platform validation (aspect ratio, length, Reddit flairs, Facebook pages). |
 | `/upload-post:repurpose-video` | Take a long video, transcribe it, pick viral moments, cut clips with FFmpeg, optionally add hook overlays, then schedule to TikTok / Reels / Shorts. |
 | `/upload-post:autodm-setup` | Build an Instagram comment-to-DM funnel: keyword trigger → public reply → private DM. |
@@ -70,7 +70,7 @@ claude --plugin-dir ./upload-post-plugin
 
 ```text
 /upload-post:setup
-/upload-post:connect-accounts          # link your first account
+# Connect your own accounts at app.upload-post.com/manage-users (web, no JWT needed)
 /upload-post:schedule-campaign         # post something
 /upload-post:analyze-performance       # see what worked after a few days
 /upload-post:repurpose-video           # turn a long video into shorts
@@ -82,10 +82,10 @@ claude --plugin-dir ./upload-post-plugin
 | Symptom | Likely cause | Fix |
 | :------ | :----------- | :-- |
 | `UPLOAD_POST_API_KEY missing` on setup | Env var not exported or shell not restarted | `export UPLOAD_POST_API_KEY=...` and restart Claude Code |
-| `list_accounts` returns 401 | API key wrong or rotated | Regenerate at app.upload-post.com/settings/api |
-| `list_accounts` returns empty | No social accounts linked yet | Run `/upload-post:connect-accounts` |
+| `get_account_info` returns 401 | API key wrong or rotated | Regenerate at [app.upload-post.com/settings/api](https://app.upload-post.com/settings/api) |
+| `list_users` returns empty | No social accounts linked yet | Connect them at [app.upload-post.com/manage-users](https://app.upload-post.com/manage-users) |
 | Upload fails with `quota_exceeded` | Free-plan daily limit hit | Wait until quota resets or upgrade |
-| Scheduled post never went out | Token for that account expired | The `post-debugger` agent will diagnose; usually reconnect via `connect-accounts` |
+| Scheduled post never went out | Token for that account expired | The `post-debugger` agent will diagnose; usually reconnect from [manage-users](https://app.upload-post.com/manage-users) |
 
 ## Links
 
