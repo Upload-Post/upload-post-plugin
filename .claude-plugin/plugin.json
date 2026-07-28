@@ -2,7 +2,7 @@
   "name": "upload-post",
   "displayName": "Upload-Post",
   "version": "0.2.0",
-  "description": "Publish to TikTok, Instagram, YouTube, X, LinkedIn, Facebook, Threads, Pinterest, Reddit, Bluesky and Snapchat — long-form video, short clips, photos, carousels, text, threads, documents and link previews. Schedule cross-platform or drip through a posting queue, repurpose long videos into viral shorts with AI, run comment and review replies, build Instagram comment-to-DM funnels (AutoDMs), and track analytics. Backed by the hosted Upload-Post MCP server (50 tools, one-click OAuth, no API key to copy) plus eight opinionated skills and three subagents for content strategy, autodm architecture, and upload debugging. Free plan, no credit card required.",
+  "description": "Publish to 22 platforms — TikTok, Instagram, YouTube, X, LinkedIn, Facebook, Threads, Pinterest, Reddit, Bluesky, Google Business, Discord, Telegram, Mastodon, WordPress and more — with long-form video, short clips, photos, carousels, text, threads and documents. Schedule cross-platform or drip through a posting queue, repurpose long videos into viral shorts with AI, run comment and review replies, build Instagram comment-to-DM funnels (AutoDMs), and track analytics. Backed by the hosted Upload-Post MCP server (50 tools, one-click OAuth, no API key to copy) plus eight opinionated skills and three subagents for content strategy, autodm architecture, and upload debugging. Free plan, no credit card required.",
   "author": {
     "name": "Upload-Post",
     "email": "info@upload-post.com",
@@ -28,7 +28,6 @@
     "pinterest",
     "reddit",
     "bluesky",
-    "snapchat",
     "viral-clips",
     "autoshorts",
     "video-repurposing",
@@ -41,6 +40,11 @@
     "upload-post",
     "mcp",
     "free-plan",
-    "no-credit-card"
+    "no-credit-card",
+    "mastodon",
+    "discord",
+    "telegram",
+    "wordpress",
+    "google-business"
   ]
 }

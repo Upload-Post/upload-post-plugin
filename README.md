@@ -123,6 +123,13 @@ Grab a key at [app.upload-post.com/settings/api](https://app.upload-post.com/set
 | Upload fails with `quota_exceeded` | Free-plan daily limit hit | Wait until quota resets or upgrade |
 | Scheduled post never went out | Token for that account expired | The `post-debugger` agent will diagnose; usually reconnect from [manage-users](https://app.upload-post.com/manage-users) |
 
+## Documentation
+
+- [Quick start](./QUICK_START.md) — install, authenticate, publish, in about two minutes.
+- [Features](./FEATURES.md) — platform support matrix by content type, all 50 tools by family, and the known limitations.
+- [Examples](./EXAMPLES.md) — real prompts and what the plugin does with them.
+- [Changelog](./CHANGELOG.md) — what changed between versions.
+
 ## Links
 
 - Upload-Post: [upload-post.com](https://upload-post.com)
