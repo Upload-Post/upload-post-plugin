@@ -25,7 +25,10 @@ Call the analytics tools in parallel:
 - `get_total_impressions` with `profileUsername` — headline number across platforms.
 - `get_platform_metrics` — per-platform breakdown for the workspace.
 - `get_post_analytics` with `requestId` — deep dive on a specific upload.
+- `get_history` — paginated log of what was actually published, and when. Use it to build the denominator (posting cadence) that the engagement numbers hang off.
 - `manage_autodms` with `action: "status"` and `user` — AutoDM counters, if any are running.
+
+For qualitative signal, `get_post_comments` on the top and bottom post is worth more than another metric: what people actually said explains the numbers.
 
 ## 3. Summarise
 
@@ -37,7 +40,7 @@ Lead with the headline number and the delta vs the previous period. Then three b
 
 ## 4. Hand off to action
 
-If the user agrees with the next move, route them to the right skill: `repurpose-video` if it is about shorts, `schedule-campaign` if they have content ready, `autodm-setup` if the action is about converting engagement into leads.
+If the user agrees with the next move, route them to the right skill: `repurpose-video` if it is about shorts, `schedule-campaign` if they have content ready, `posting-queue` if the problem is cadence rather than content, `manage-comments` if the win is in replying, `autodm-setup` if the action is about converting engagement into leads.
 
 ## Cross-platform comparisons
 

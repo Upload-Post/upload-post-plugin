@@ -1,15 +1,15 @@
 {
   "name": "upload-post",
   "displayName": "Upload-Post",
-  "version": "0.1.0",
-  "description": "Publish to TikTok, Instagram, YouTube, X, LinkedIn, Facebook, Threads, Pinterest, Reddit, Bluesky and Snapchat — long-form video, short clips, photos, carousels, text, threads, documents and link previews. Schedule cross-platform, repurpose long videos into viral shorts with AI, build Instagram comment-to-DM funnels (AutoDMs), and track analytics. Backed by the Upload-Post MCP server (40+ tools) plus six opinionated skills and three subagents for content strategy, autodm architecture, and upload debugging. Free plan, no credit card required.",
+  "version": "0.2.0",
+  "description": "Publish to TikTok, Instagram, YouTube, X, LinkedIn, Facebook, Threads, Pinterest, Reddit, Bluesky and Snapchat — long-form video, short clips, photos, carousels, text, threads, documents and link previews. Schedule cross-platform or drip through a posting queue, repurpose long videos into viral shorts with AI, run comment and review replies, build Instagram comment-to-DM funnels (AutoDMs), and track analytics. Backed by the hosted Upload-Post MCP server (50 tools, one-click OAuth, no API key to copy) plus eight opinionated skills and three subagents for content strategy, autodm architecture, and upload debugging. Free plan, no credit card required.",
   "author": {
     "name": "Upload-Post",
     "email": "info@upload-post.com",
     "url": "https://upload-post.com"
   },
   "homepage": "https://upload-post.com",
-  "repository": "https://github.com/mutonby/upload-post-plugin",
+  "repository": "https://github.com/Upload-Post/upload-post-plugin",
   "license": "MIT",
   "keywords": [
     "social-media",

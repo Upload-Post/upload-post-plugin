@@ -1,36 +1,31 @@
 ---
-description: Onboard a new Upload-Post user. Configure UPLOAD_POST_API_KEY, verify the MCP connection, and confirm that at least one social account is connected. Use when the user first installs the plugin, asks how to get started, says the plugin is not working, or runs /upload-post:setup.
+description: Onboard a new Upload-Post user. Authenticate the hosted MCP server over OAuth, verify the connection, and confirm that at least one social account is connected. Use when the user first installs the plugin, asks how to get started, says the plugin is not working, or runs /upload-post:setup.
 ---
 
 # Upload-Post setup
 
 Walk the user through three checks. Stop as soon as one fails and help them fix it before moving on.
 
-## 1. API key
+## 1. Authentication
 
-The Upload-Post MCP server reads `UPLOAD_POST_API_KEY` from the environment. Check whether it is set:
+The plugin points at the hosted MCP server (`https://mcp.upload-post.com/mcp`). There is **no API key to copy and no env var to export** — the server speaks OAuth 2.1 with dynamic client registration, so Claude Code handles it.
 
-```bash
-echo "${UPLOAD_POST_API_KEY:-MISSING}"
-```
+Check the connection state with `/mcp`. Expected states:
 
-If missing:
+- **connected** — nothing to do, move to step 2.
+- **needs authentication** — tell the user to run `/mcp`, select `upload-post`, and choose *Authenticate*. A browser tab opens on `app.upload-post.com/oauth/authorize`; they log in (or sign up — the free plan needs no card) and approve. The tab closes itself and the tools become available.
+- **failed / not listed** — the plugin may not be enabled. Have them check `/plugin` and restart Claude Code.
 
-- Tell the user to grab their API key at https://app.upload-post.com/settings/api
-- Show them how to export it for the current shell and how to persist it in `~/.zshrc` or `~/.bashrc`:
+The user can revoke access at any time from **Connected Apps** in the Upload-Post dashboard.
 
-  ```bash
-  export UPLOAD_POST_API_KEY="upk_live_..."
-  ```
-
-- Remind them to restart Claude Code so the MCP server picks up the new env.
+> **API-key alternative.** Users who prefer a long-lived key (CI, headless, shared machines) can skip OAuth by adding their own MCP entry with an `Authorization: ApiKey <key>` header, or by running the stdio server `npx -y @upload-post/mcp` with `UPLOAD_POST_API_KEY`. Only bring this up if the user asks for it or OAuth is blocked in their environment.
 
 ## 2. MCP connection
 
-Call `get_account_info`. It is the cheapest call — it validates the API key and returns nothing else. If it succeeds, the connection is live.
+Call `get_account_info`. It is the cheapest call — it validates the session and returns the account state. If it succeeds, the connection is live.
 
-If it errors with auth: the key is wrong or expired — send the user back to step 1.
-If it errors with network: the user may be on a VPN that blocks `mcp.upload-post.com` or the npx install is failing — suggest `npx -y @upload-post/mcp --version` to verify the package downloads.
+- **401 / auth error** — the OAuth token was revoked or expired. Re-run `/mcp` → *Authenticate*.
+- **Network error** — the user may be behind a proxy or VPN that blocks `mcp.upload-post.com`. Verify with `curl -sI https://mcp.upload-post.com/.well-known/oauth-protected-resource`.
 
 ## 3. Profiles and connected accounts
 
@@ -51,6 +46,8 @@ There they create a profile, click each platform they want to post to, and accep
 When all three checks pass, give a one-line summary and suggest the next move based on what the user mentioned:
 
 - Has content to post → `/upload-post:schedule-campaign`
+- Wants a repeating posting rhythm → `/upload-post:posting-queue`
 - Has a long video → `/upload-post:repurpose-video`
 - Wants leads from Instagram → `/upload-post:autodm-setup`
+- Has comments or reviews piling up → `/upload-post:manage-comments`
 - Wants to understand their numbers → `/upload-post:analyze-performance`

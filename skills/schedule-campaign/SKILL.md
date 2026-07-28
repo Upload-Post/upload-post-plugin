@@ -26,7 +26,7 @@ Each platform has constraints. Catch the obvious ones before calling the API:
 - **Reddit**: needs a subreddit (and sometimes a flair). Inspect `platformOptions` and use `get_reddit_detailed_posts` if the user wants reference posts.
 - **Facebook**: needs a page id — call `get_facebook_pages`.
 - **Pinterest**: needs a board id — call `get_pinterest_boards`.
-- **Google Business**: needs a location id — call `get_google_business_locations` and then `select_google_business_location`.
+- **Google Business**: needs a location id — call `get_google_business_locations`, then pass the id as `googleBusinessLocationId` inside `platformOptions`. There is no separate "select location" tool.
 
 ## 3. Schedule
 
@@ -43,7 +43,7 @@ Every call takes:
 - `platforms` — array of platform names.
 - `title` and/or `description` — caption.
 - `scheduledDate` — ISO 8601 (e.g. `2026-12-25T10:00:00Z`) + `timezone` (IANA, e.g. `Europe/Madrid`).
-- `addToQueue: true` — alternative to a fixed time; appends to the user's queue.
+- `addToQueue: true` — alternative to a fixed time; appends to the profile's queue instead of pinning an exact timestamp. Use `preview_queue` first if the user wants to see which slot it will land in (see `/upload-post:posting-queue`).
 - `platformOptions` — per-platform overrides as a flat object with camelCase keys (`tiktokPrivacyLevel`, `youtubeMadeForKids`, `redditSubreddit`, etc.).
 - `asyncUpload: true` (default) — returns a `request_id`; poll `get_status` for completion.
 
@@ -55,4 +55,10 @@ Read back: platform → handle → scheduled time → `request_id`. If a platfor
 
 ## Listing and editing
 
-If the user asks "what do I have scheduled", call `list_scheduled`. To change a scheduled post, use `edit_scheduled` or `cancel_scheduled` rather than creating a new one.
+If the user asks "what do I have scheduled", call `list_scheduled`. To change a scheduled post, use `edit_scheduled` or `cancel_scheduled` rather than creating a new one. For everything already published, `get_history` gives the paginated log across all profiles.
+
+## After the fact
+
+- **A platform failed** → `retry_post` with the `requestId` (async upload) or `jobId` (scheduled/queued). It re-runs the same payload; do not rebuild the campaign by hand.
+- **The user wants a published post taken down** → `unpublish_post` with `user`, `platform` and `postId`. It is destructive and irreversible, so confirm first. Only facebook, youtube, x, linkedin and threads are supported — Instagram and TikTok deletions must be done in the native app.
+- **The user wants to see what is already live on an account** → `get_media` pulls recent posts straight from the connected platform, useful to avoid reposting the same thing.
