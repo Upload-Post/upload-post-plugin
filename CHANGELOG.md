@@ -4,6 +4,13 @@ All notable changes to the Upload-Post plugin for Claude Code.
 
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+- `.claude-plugin/marketplace.json`: the repo is now a self-hosted Claude Code marketplace (`/plugin marketplace add Upload-Post/upload-post-plugin`).
+- `gemini-extension.json` and `GEMINI.md`: install as a Gemini CLI extension with `gemini extensions install https://github.com/Upload-Post/upload-post-plugin`.
+
 ## [0.2.0] — 2026-07-28
 
 ### Changed

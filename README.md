@@ -1,4 +1,4 @@
-# Upload-Post for Claude Code, Cursor, Grok Bot and Grok Build
+# Upload-Post for Claude Code, Cursor, Gemini CLI, Grok Bot and Grok Build
 
 Schedule, repurpose, and grow on social media — directly from Claude Code.
 
@@ -44,12 +44,27 @@ Authentication is OAuth 2.1 with dynamic client registration (RFC 7591) and PKCE
 
 ## Install
 
+### From this repo's marketplace (Claude Code)
+
+```text
+/plugin marketplace add Upload-Post/upload-post-plugin
+/plugin install upload-post@upload-post
+```
+
 ### From the community marketplace
 
 ```text
 /plugin marketplace add anthropics/claude-plugins-community
 /plugin install upload-post@claude-community
 ```
+
+### Gemini CLI
+
+```bash
+gemini extensions install https://github.com/Upload-Post/upload-post-plugin
+```
+
+The extension (`gemini-extension.json`) registers the hosted MCP server and loads `GEMINI.md` as context. On first use Gemini CLI opens the OAuth sign-in; run `/mcp auth upload-post` to re-authenticate.
 
 ### Grok Bot, Cursor and Grok Build
 

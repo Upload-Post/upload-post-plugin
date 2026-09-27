@@ -1,0 +1,26 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "upload-post",
+  "description": "Official Upload-Post marketplace: the Upload-Post plugin for publishing, scheduling, repurposing and analysing social media posts from Claude Code via the hosted Upload-Post MCP server.",
+  "owner": {
+    "name": "Upload-Post",
+    "email": "info@upload-post.com",
+    "url": "https://www.upload-post.com"
+  },
+  "plugins": [
+    {
+      "name": "upload-post",
+      "source": "./",
+      "description": "Publish and schedule videos, photos, carousels, text and documents to TikTok, Instagram, YouTube, LinkedIn, Facebook, X, Threads, Pinterest, Reddit, Bluesky and more through the hosted Upload-Post MCP server (OAuth, no API key to copy). Includes skills for campaigns, posting queue, video repurposing, comments, AutoDMs and analytics, plus three subagents.",
+      "author": {
+        "name": "Upload-Post",
+        "email": "info@upload-post.com"
+      },
+      "homepage": "https://www.upload-post.com",
+      "repository": "https://github.com/Upload-Post/upload-post-plugin",
+      "license": "MIT",
+      "category": "productivity",
+      "tags": ["social-media", "mcp", "scheduling", "tiktok", "instagram", "youtube", "linkedin", "x"]
+    }
+  ]
+}
