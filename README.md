@@ -1,4 +1,4 @@
-# Upload-Post for Claude Code
+# Upload-Post for Claude Code, Cursor, Grok Bot and Grok Build
 
 Schedule, repurpose, and grow on social media — directly from Claude Code.
 
@@ -50,6 +50,18 @@ Authentication is OAuth 2.1 with dynamic client registration (RFC 7591) and PKCE
 /plugin marketplace add anthropics/claude-plugins-community
 /plugin install upload-post@claude-community
 ```
+
+### Grok Bot, Cursor and Grok Build
+
+The same repo ships `.cursor-plugin/plugin.json` + `mcp.json` (Cursor Marketplace, which also feeds Grok Bot's plugin catalog) and `.grok-plugin/plugin.json` + `.mcp.json` (Grok Build plugin marketplace).
+
+- **Grok Bot:** Plugins in the sidebar → search **Upload-Post** → Add, then approve the Upload-Post sign-in.
+- **Cursor:** Marketplace → search **Upload-Post** → Add.
+- **Grok Build:** install `upload-post` from the xAI plugin marketplace.
+
+Until a listing is live, add the MCP server manually with the URL `https://mcp.upload-post.com/mcp`.
+
+**Network and credentials:** the only endpoint is `https://mcp.upload-post.com` (OAuth 2.1 + PKCE; API keys via `Authorization: ApiKey <key>` are also accepted). The plugin contains no scripts, hooks or binaries.
 
 ### Locally (development)
 

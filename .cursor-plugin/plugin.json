@@ -1,0 +1,23 @@
+{
+  "name": "upload-post",
+  "version": "0.2.0",
+  "description": "Publish, schedule and analyze social media on TikTok, Instagram, YouTube, LinkedIn, Facebook, X, Threads, Pinterest, Reddit, Bluesky, Google Business and more from your agent. Backed by the hosted Upload-Post MCP server (one-click OAuth, no API key to copy) plus skills for cross-platform campaigns, posting queue, video repurposing, comment replies, Instagram comment-to-DM funnels and analytics. Free plan, no credit card.",
+  "author": {
+    "name": "Upload-Post",
+    "url": "https://www.upload-post.com"
+  },
+  "homepage": "https://www.upload-post.com",
+  "repository": "https://github.com/Upload-Post/upload-post-plugin",
+  "license": "MIT",
+  "keywords": [
+    "upload-post",
+    "uploadpost",
+    "upload post",
+    "upload-post mcp",
+    "upload-post api",
+    "upload-post schedule",
+    "upload-post autodm"
+  ],
+  "displayName": "Upload-Post",
+  "logo": "https://raw.githubusercontent.com/Upload-Post/upload-post-plugin/main/assets/logo.png"
+}
