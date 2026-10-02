@@ -1,4 +1,5 @@
 ---
+name: setup
 description: Onboard a new Upload-Post user. Authenticate the hosted MCP server over OAuth, verify the connection, and confirm that at least one social account is connected. Use when the user first installs the plugin, asks how to get started, says the plugin is not working, or runs /upload-post:setup.
 ---
 

@@ -1,4 +1,5 @@
 ---
+name: whitelabel-connect
 description: Generate a JWT-authenticated connection URL so a client or end-user can OAuth their social accounts into a profile inside YOUR Upload-Post workspace. For white-label integrations, SaaS embeds and agency client onboarding. NOT for connecting your own accounts — for that, send the user to https://app.upload-post.com/manage-users in their browser.
 ---
 

@@ -1,4 +1,5 @@
 ---
+name: analyze-performance
 description: Pull analytics from Upload-Post (account-level and post-level), summarise what is working, and suggest content moves. Use when the user asks about analytics, performance, engagement, impressions, reach, top posts, or what to post next.
 ---
 

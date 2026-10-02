@@ -1,5 +1,6 @@
 ---
-description: Read and reply to comments on published posts across Instagram, Facebook, YouTube and LinkedIn, and reply to Google Business reviews. Use when the user asks about comments, replies, engagement in the comment section, moderating or deleting a comment, or answering a Google Business review.
+name: manage-comments
+description: Read, reply to and moderate comments on published posts across Instagram, Facebook, YouTube, LinkedIn, TikTok, X, Threads and Bluesky, and reply to Google Business reviews. Use when the user asks about comments, replies, engagement in the comment section, moderating or deleting a comment, or answering a Google Business review.
 ---
 
 # Work the comment section
@@ -12,13 +13,13 @@ Comment tools identify a post by either `postId` or `postUrl`. Platform quirks:
 
 - **YouTube**: `postId` is the videoId.
 - **LinkedIn**: `postId` is the post urn.
-- **TikTok**: not supported for comments at all. Say so plainly rather than trying and failing.
+- **TikTok**: `postId` is the video id and is always required — `postUrl` is not accepted. TikTok comment tools also need the `comments` capability on the profile's TikTok account (check the `capabilities` array in `list_users`). It is granted at connection time, so an account connected before that has to reconnect TikTok first; say so plainly rather than retrying.
 
 If the user does not have the id, `get_media` lists recent posts pulled from the connected account, and `get_history` lists what was published through Upload-Post.
 
 ## 2. Read
 
-`get_post_comments` with `user`, `platform` (instagram / facebook / youtube / linkedin), and the post identifier. `limit` caps at 50 — Meta's ceiling, not ours — and `after` pages through the rest.
+`get_post_comments` with `user`, `platform` (instagram / facebook / youtube / linkedin / tiktok / x / threads / bluesky; defaults to instagram), and the post identifier. `limit` caps at 50 — Meta's and TikTok's ceiling, not ours — and `after` pages through the rest. Add `commentId` to read the replies under one comment instead of the top-level comments.
 
 Do not paste the raw list back. Triage it:
 
@@ -35,13 +36,21 @@ Three different tools, and picking the wrong one is the main failure mode here:
 | :--- | :--- | :--- |
 | Public reply under an existing comment | `public_reply_to_comment` | `user`, `commentId`, `message`. Instagram only. |
 | Private DM to the person who commented | `reply_to_comment` | `user`, `commentId`, `message`. Instagram only, and **only within Instagram's 7-day reply window** — after that the API rejects it. |
-| Top-level comment, or any reply on Facebook / YouTube / LinkedIn | `create_comment` | Provide exactly ONE of `commentId` (reply), `postId`, or `postUrl` (top-level). Instagram is the exception: it accepts replies only, so an Instagram call must pass `commentId`. |
+| Top-level comment, or any reply on Facebook / YouTube / LinkedIn / TikTok / X / Threads / Bluesky | `create_comment` | Provide exactly ONE of `commentId` (reply), `postId`, or `postUrl` (top-level). Instagram accepts replies only, so an Instagram call must pass `commentId`. TikTok always needs `postId` (the video id), plus `commentId` on top of it to reply inside a thread. |
 
 Draft replies in the user's own voice — match the tone of their existing captions rather than defaulting to brand-manager English. Show the drafts and get approval before sending a batch; these are public and irreversible.
 
 ## 4. Moderate
 
-`delete_comment` takes `user`, `commentId`, and on LinkedIn also `postId` (the post urn). It is destructive and cannot be undone — always confirm the specific comment text with the user first, never delete on a general instruction like "clean up the spam" without listing what you are about to remove.
+Reversible first: `comment_action` takes `user`, `platform`, `action`, and usually `commentId` (+ `postId` where noted). Every action has an inverse, so prefer it over deleting:
+
+- **TikTok**: `hide`/`unhide`, `pin`/`unpin` (with `postId`), `like`/`unlike` (no `postId`).
+- **Facebook**: `hide`/`unhide`, `like`/`unlike`, `edit` (with `message`).
+- **Instagram**: `hide`/`unhide` a comment, or `enable_comments`/`disable_comments` on a post (`postId`, no `commentId`).
+- **YouTube**: `hide`/`unhide`/`hold` (with `postId`; `banAuthor` only with `hide`).
+- **Threads**: `hide`/`unhide`, `approve`/`ignore`.
+
+Permanent: `delete_comment` takes `user`, `platform` (instagram / facebook / youtube / linkedin / tiktok / x / bluesky — Threads cannot delete comments), `commentId`, and on LinkedIn also `postId` (the post urn). It is destructive and cannot be undone — always confirm the specific comment text with the user first, never delete on a general instruction like "clean up the spam" without listing what you are about to remove.
 
 ## Google Business reviews
 

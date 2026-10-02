@@ -1,4 +1,5 @@
 ---
+name: posting-queue
 description: Configure and inspect the Upload-Post posting queue — the recurring time slots that queued content drips into. Use when the user wants a posting schedule or rhythm, asks when their next post goes out, wants to change posting times or days, or says they want to queue content instead of picking exact timestamps.
 ---
 
