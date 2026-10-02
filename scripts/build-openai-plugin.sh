@@ -10,6 +10,7 @@ trap 'rm -rf "$stage"' EXIT
 mkdir -p "$stage/.codex-plugin" "$stage/assets"
 cp .codex-plugin/plugin.json "$stage/.codex-plugin/"
 cp assets/openai-logo.png "$stage/assets/logo.png"
+for i in 1 2 3 4; do cp "assets/openai-screenshot-$i.png" "$stage/assets/screenshot-$i.png"; done
 cp -R openai-skills "$stage/skills"
 find "$stage" -name .DS_Store -delete
 mkdir -p dist && rm -f "$out"

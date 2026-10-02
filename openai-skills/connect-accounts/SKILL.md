@@ -24,7 +24,7 @@ Social accounts are connected on the web, not in the chat. Send the user to http
 
 ## 4. Plans
 
-The free plan includes 10 uploads per month. If a tool reports the free limit, say so and point to https://app.upload-post.com for upgrading; do not retry.
+If a tool reports that the plan limit was reached, say so plainly and point to https://app.upload-post.com to manage the plan; do not retry.
 
 ## 5. Next step
 
