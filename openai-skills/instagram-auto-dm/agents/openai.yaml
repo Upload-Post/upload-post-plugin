@@ -1,0 +1,6 @@
+interface:
+  display_name: "Instagram auto-DM"
+  short_description: "DM everyone who comments a keyword"
+  default_prompt: "When someone comments GUIDE on my latest Instagram post, send them a DM with my free guide link."
+policy:
+  allow_implicit_invocation: true

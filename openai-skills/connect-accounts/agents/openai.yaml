@@ -1,0 +1,6 @@
+interface:
+  display_name: "Connect accounts"
+  short_description: "Set up Upload-Post and your social accounts"
+  default_prompt: "Which social accounts do I have connected to Upload-Post?"
+policy:
+  allow_implicit_invocation: true

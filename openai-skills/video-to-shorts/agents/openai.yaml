@@ -1,0 +1,6 @@
+interface:
+  display_name: "Video to shorts"
+  short_description: "Turn a long video into Reels, Shorts and TikToks"
+  default_prompt: "Cut my latest podcast episode into 5 short clips and schedule them to TikTok, Reels and Shorts."
+policy:
+  allow_implicit_invocation: true

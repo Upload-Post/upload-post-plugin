@@ -1,0 +1,6 @@
+interface:
+  display_name: "Publish a video"
+  short_description: "Post a video to Reels, TikTok, Shorts and more"
+  default_prompt: "Post this video to Instagram Reels, TikTok and YouTube Shorts tomorrow at 9am."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,87 @@
+{
+  "name": "app-6a1fed02ff5c8191b4060c5807221f26",
+  "version": "1.1.0",
+  "description": "Upload-Post is a social media scheduler and publishing tool. Upload, auto-post, schedule, and analyze your content across 14 social networks from one conversation: Instagram (Reels, posts, carousels, Stories), TikTok, YouTube (videos and Shorts), Facebook (Pages, Reels, Stories), X (Twitter), Threads, Pinterest, LinkedIn (profiles and Pages), Bluesky, Google Business Profile, Telegram, Discord, Mastodon, and WordPress.\nAvailable skills:\nPublish a video: Post one video to Instagram Reels, TikTok, YouTube Shorts and more at once, even straight from your computer.\nSchedule social posts: Plan and schedule photos, carousels, text posts, and documents across every network, with per-platform captions.\nContent calendar: Plan a week or a month of posts and drip them out through a posting queue.\nSocial media analytics: See views, reach, followers, and your best and worst posts, with one concrete next move.\nReply to comments: Read, reply to, and moderate comments, and answer Google Business reviews.\nInstagram auto-DM: Send a DM automatically to everyone who comments a keyword on your post.\nVideo to shorts: Cut a long video into short clips with FFmpeg and schedule them as Reels, Shorts, and TikToks.\nConnect accounts: Get set up and connect your social accounts in a couple of clicks.\nOnce installed, describe what you want in plain language or invoke Upload-Post directly with @Upload-Post.\nTry prompts like:\n- @Upload-Post, post this video to Instagram Reels, TikTok and YouTube Shorts tomorrow at 9am.\n- @Upload-Post, schedule a week of posts to LinkedIn, X and Facebook.\n- @Upload-Post, how did my posts perform this month?\n- @Upload-Post, reply to the latest comments on my last Instagram post.\n\nRequirements: an Upload-Post account (free plan with 10 uploads per month) and the social accounts you want to post to, connected once at app.upload-post.com. Publishing goes through Upload-Post's official platform integrations, so ChatGPT never sees your social media passwords.",
+  "author": {
+    "name": "Upload-Post",
+    "email": "info@upload-post.com",
+    "url": "https://upload-post.com"
+  },
+  "homepage": "https://www.upload-post.com/",
+  "repository": "https://github.com/Upload-Post/upload-post-plugin",
+  "license": "MIT",
+  "keywords": [
+    "social media",
+    "social media scheduler",
+    "schedule posts",
+    "post scheduler",
+    "auto post",
+    "cross-post",
+    "content calendar",
+    "social media management",
+    "social media analytics",
+    "upload video",
+    "video uploader",
+    "instagram",
+    "instagram reels",
+    "instagram stories",
+    "tiktok",
+    "youtube",
+    "youtube shorts",
+    "facebook",
+    "x",
+    "twitter",
+    "linkedin",
+    "threads",
+    "pinterest",
+    "bluesky",
+    "google business profile",
+    "telegram",
+    "discord",
+    "mastodon",
+    "wordpress",
+    "reels",
+    "shorts",
+    "carousel",
+    "comments",
+    "instagram dm",
+    "auto dm",
+    "repurpose video",
+    "clips",
+    "creators",
+    "agencies",
+    "marketing"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Upload-Post",
+    "shortDescription": "Social media posts scheduler",
+    "longDescription": "Upload-Post is a social media scheduler and publishing tool. Upload, auto-post, schedule, and analyze your content across 14 social networks from one conversation: Instagram (Reels, posts, carousels, Stories), TikTok, YouTube (videos and Shorts), Facebook (Pages, Reels, Stories), X (Twitter), Threads, Pinterest, LinkedIn (profiles and Pages), Bluesky, Google Business Profile, Telegram, Discord, Mastodon, and WordPress.\nAvailable skills:\nPublish a video: Post one video to Instagram Reels, TikTok, YouTube Shorts and more at once, even straight from your computer.\nSchedule social posts: Plan and schedule photos, carousels, text posts, and documents across every network, with per-platform captions.\nContent calendar: Plan a week or a month of posts and drip them out through a posting queue.\nSocial media analytics: See views, reach, followers, and your best and worst posts, with one concrete next move.\nReply to comments: Read, reply to, and moderate comments, and answer Google Business reviews.\nInstagram auto-DM: Send a DM automatically to everyone who comments a keyword on your post.\nVideo to shorts: Cut a long video into short clips with FFmpeg and schedule them as Reels, Shorts, and TikToks.\nConnect accounts: Get set up and connect your social accounts in a couple of clicks.\nOnce installed, describe what you want in plain language or invoke Upload-Post directly with @Upload-Post.\nTry prompts like:\n- @Upload-Post, post this video to Instagram Reels, TikTok and YouTube Shorts tomorrow at 9am.\n- @Upload-Post, schedule a week of posts to LinkedIn, X and Facebook.\n- @Upload-Post, how did my posts perform this month?\n- @Upload-Post, reply to the latest comments on my last Instagram post.\n\nRequirements: an Upload-Post account (free plan with 10 uploads per month) and the social accounts you want to post to, connected once at app.upload-post.com. Publishing goes through Upload-Post's official platform integrations, so ChatGPT never sees your social media passwords.",
+    "developerName": "Upload-Post",
+    "category": "Productivity",
+    "capabilities": [],
+    "defaultPrompt": [
+      "Post this video to Instagram Reels, TikTok and YouTube Shorts tomorrow at 9am",
+      "Schedule a week of posts to LinkedIn, X and Facebook",
+      "How did my social media posts perform this month?"
+    ],
+    "logo": "./assets/logo.png",
+    "composerIcon": "./assets/logo.png",
+    "websiteURL": "https://www.upload-post.com/",
+    "privacyPolicyURL": "https://www.upload-post.com/data-and-privacy-policy",
+    "termsOfServiceURL": "https://www.upload-post.com/terms-of-use",
+    "supportURL": "https://docs.upload-post.com/"
+  },
+  "extensions": {
+    "com.openai": {
+      "publication": {
+        "translations": {
+          "es-ES": {
+            "subtitle": "Programador de redes sociales",
+            "description": "Upload-Post es un programador y publicador de redes sociales para ChatGPT. Sube, publica automáticamente, programa y analiza tu contenido en 14 redes sociales desde una sola conversación: Instagram (Reels, posts, carruseles, Stories), TikTok, YouTube (vídeos y Shorts), Facebook (páginas, Reels, Stories), X (Twitter), Threads, Pinterest, LinkedIn (perfiles y páginas), Bluesky, Google Business Profile, Telegram, Discord, Mastodon y WordPress.\n\nPídele cosas como \"Publica este vídeo en Instagram Reels, TikTok y YouTube Shorts\", \"Programa mis posts de Instagram de la próxima semana\", \"Comparte esta foto en todas mis cuentas\", \"Publica esto en LinkedIn y X mañana a las 9\" o \"¿Qué tal han funcionado mis últimos posts?\".\n\nQué puedes hacer:\n- Publicar vídeos, fotos y carruseles, posts de texto y documentos en una o varias redes a la vez, con un texto distinto para cada red si quieres.\n- Subir un vídeo directamente desde tu ordenador con Upload Studio, sin necesidad de un enlace público.\n- Programar publicaciones, planificar tu calendario de contenido con una cola de publicación, y editar o cancelar lo programado.\n- Ver analíticas: visualizaciones, impresiones, alcance, seguidores, audiencia y rendimiento de cada post.\n- Leer, responder y moderar comentarios, y gestionar los mensajes directos de Instagram.\n- Usar música en tendencia, ubicaciones y ajustes de publicación de TikTok, y obtener sugerencias de hashtags.\n- Gestionar varios perfiles y marcas, páginas de Facebook y LinkedIn, tableros de Pinterest y reseñas de Google Business.\n- Procesar vídeo e imagen con FFmpeg antes de publicar.\n\nConectas tus redes una vez en Upload-Post e inicias sesión en ChatGPT con OAuth. Las publicaciones salen por las integraciones oficiales de Upload-Post con cada red, así que ChatGPT nunca ve tus contraseñas. El plan gratuito incluye 10 subidas al mes.\n\nPensado para creadores, community managers, agencias y equipos de marketing que quieren que ChatGPT se encargue de publicar y programar en redes sociales."
+          }
+        }
+      }
+    }
+  }
+}

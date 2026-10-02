@@ -1,0 +1,6 @@
+interface:
+  display_name: "Content calendar"
+  short_description: "Plan a month of posts and a posting schedule"
+  default_prompt: "Plan a week of posts for my Instagram and TikTok and queue them at my best times."
+policy:
+  allow_implicit_invocation: true
