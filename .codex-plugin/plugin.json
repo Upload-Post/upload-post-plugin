@@ -140,7 +140,7 @@
         "commerce_description": "Upload-Post does not sell products or process payments inside ChatGPT."
       },
       "publication": {
-        "release_notes": "Adds eight skills (publish a video, schedule social posts, content calendar, social media analytics, reply to comments, Instagram auto-DM, video to shorts, connect accounts), a clearer listing that names all 14 supported networks, three starter prompts, and support for the latest Upload-Post tools: comments on TikTok, X, Threads and Bluesky, TikTok music, locations and publishing settings, TikTok audience and hashtag suggestions, Google Business review replies, retrying failed posts, and unpublishing posts.",
+        "release_notes": "Adds eight skills (publish a video, schedule social posts, content calendar, social media analytics, reply to comments, Instagram auto-DM, video to shorts, connect accounts), a clearer listing that names all 14 supported networks, three starter prompts, guided account connection for new users (one-click connect link), and support for the latest Upload-Post tools: comments on TikTok, X, Threads and Bluesky, TikTok music, locations and publishing settings, TikTok audience and hashtag suggestions, Google Business review replies, retrying failed posts, and unpublishing posts.",
         "translations": {
           "es-ES": {
             "subtitle": "Programador de redes sociales",
