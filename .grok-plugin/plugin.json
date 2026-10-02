@@ -1,6 +1,6 @@
 {
   "name": "upload-post",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Publish, schedule and analyze social media on TikTok, Instagram, YouTube, LinkedIn, Facebook, X, Threads, Pinterest, Reddit, Bluesky, Google Business and more from your agent. Backed by the hosted Upload-Post MCP server (one-click OAuth, no API key to copy) plus skills for cross-platform campaigns, posting queue, video repurposing, comment replies, Instagram comment-to-DM funnels and analytics. Free plan, no credit card.",
   "author": {
     "name": "Upload-Post",

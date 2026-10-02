@@ -1,6 +1,6 @@
 {
   "name": "upload-post",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Publish and schedule videos, photos, carousels, text and documents to TikTok, Instagram, YouTube, LinkedIn, Facebook, X, Threads, Pinterest, Reddit, Bluesky and Google Business Profile via the hosted Upload-Post MCP server.",
   "mcpServers": {
     "upload-post": {

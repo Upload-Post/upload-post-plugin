@@ -6,10 +6,21 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+## [0.3.0] — 2026-10-02
+
 ### Added
 
 - `.claude-plugin/marketplace.json`: the repo is now a self-hosted Claude Code marketplace (`/plugin marketplace add Upload-Post/upload-post-plugin`).
 - `gemini-extension.json` and `GEMINI.md`: install as a Gemini CLI extension with `gemini extensions install https://github.com/Upload-Post/upload-post-plugin`.
+
+### Fixed
+
+- Skills synced with the current MCP server tool parameters:
+  - `autodm-setup`: `manage_autodms` takes `profile_username`, `post_url`, `reply_message`, `buttons` (max 3), `monitoring_interval` (≥ 15 min), `trigger_keywords`, `monitor_id` and `include_inactive`. AutoDM sends the DM only; there is no public-reply field.
+  - `manage-comments`: comments now cover TikTok (`postId` = video id, needs the `comments` capability), X, Threads and Bluesky, plus reversible moderation with `comment_action`.
+  - `repurpose-video`: `submit_ffmpeg_job` takes `input_url` or `files`, a `full_command` starting with `ffmpeg` using `{input}`/`{output}` placeholders, and `output_filename`. FFmpeg quota is monthly minutes.
+  - `schedule-campaign`: Reddit publishing is currently unavailable (`reddit_unavailable`).
+- Every skill now declares a `name:` frontmatter field matching its folder.
 
 ## [0.2.0] — 2026-07-28
 
@@ -40,5 +51,6 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 - Initial release: MCP server wiring, six skills (`setup`, `whitelabel-connect`, `schedule-campaign`, `repurpose-video`, `autodm-setup`, `analyze-performance`) and three agents (`content-strategist`, `autodm-architect`, `post-debugger`).
 
+[0.3.0]: https://github.com/Upload-Post/upload-post-plugin/releases/tag/v0.3.0
 [0.2.0]: https://github.com/Upload-Post/upload-post-plugin/releases/tag/v0.2.0
 [0.1.0]: https://github.com/Upload-Post/upload-post-plugin/releases/tag/v0.1.0

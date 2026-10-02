@@ -16,10 +16,10 @@ The Upload-Post plugin connects Claude Code to the hosted [Upload-Post MCP serve
 | :---- | :----------- |
 | `/upload-post:setup` | One-time onboarding. Walks the OAuth connection, verifies the MCP link, and checks you have at least one social account connected. |
 | `/upload-post:whitelabel-connect` | Generate a JWT connection link so a client or end-user can OAuth their socials into a profile inside your workspace — for white-label embeds and agency onboarding. (Connecting your own accounts? Use [app.upload-post.com/manage-users](https://app.upload-post.com/manage-users) — a couple of clicks per network.) |
-| `/upload-post:schedule-campaign` | Schedule a post across multiple platforms at once. Handles per-platform validation (aspect ratio, length, Reddit flairs, Facebook pages). |
+| `/upload-post:schedule-campaign` | Schedule a post across multiple platforms at once. Handles per-platform validation (aspect ratio, length, Facebook pages, Pinterest boards). |
 | `/upload-post:repurpose-video` | Take a long video, transcribe it, pick viral moments, cut clips with FFmpeg, optionally add hook overlays, then schedule to TikTok / Reels / Shorts. |
 | `/upload-post:posting-queue` | Set up a recurring weekly posting rhythm (slots, days, timezone) and see what lands in the next slot. |
-| `/upload-post:manage-comments` | Read, triage and reply to comments on Instagram / Facebook / YouTube / LinkedIn, plus Google Business reviews. |
+| `/upload-post:manage-comments` | Read, triage, reply to and moderate comments on Instagram / Facebook / YouTube / LinkedIn / TikTok / X / Threads / Bluesky, plus Google Business reviews. |
 | `/upload-post:autodm-setup` | Build an Instagram comment-to-DM funnel: keyword trigger → public reply → private DM. |
 | `/upload-post:analyze-performance` | Pull analytics across accounts, identify what is working, and propose concrete next moves. |
 

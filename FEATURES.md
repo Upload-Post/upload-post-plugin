@@ -16,7 +16,7 @@ Support differs per content type — a platform in the video column is not autom
 | Facebook | ✅ | ✅ | ✅ | ✅ |
 | Threads | ✅ | ✅ | ✅ | ✅ |
 | Pinterest | ✅ | ✅ | — | ✅ |
-| Reddit | ✅ | ✅ | ✅ | ✅ |
+| Reddit | ⏸️ | ⏸️ | ⏸️ | ✅ |
 | Bluesky | ✅ | ✅ | ✅ | — |
 | Google Business | ✅ | ✅ | ✅ | — |
 | Discord | ✅ | ✅ | ✅ | — |
@@ -30,6 +30,8 @@ Support differs per content type — a platform in the video column is not autom
 | Hashnode | — | — | ✅ | — |
 | Whop | — | — | ✅ | — |
 | Listmonk | — | — | ✅ | — |
+
+⏸️ Reddit publishing is currently unavailable (`reddit_unavailable`) until the Reddit app is restored.
 
 **22 platforms** total: 15 accept video, 15 accept photos and carousels, 18 accept text, 9 report analytics. Documents (PDF carousels) are LinkedIn-only.
 
