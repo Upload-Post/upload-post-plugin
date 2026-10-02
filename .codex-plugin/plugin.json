@@ -88,54 +88,6 @@
     "com.openai": {
       "onboardingSkill": "./skills/connect-accounts/SKILL.md",
       "review": {
-        "test_cases": {
-          "positive": [
-            {
-              "description": "Publish a provided video URL to Instagram Reels with an optimized caption.",
-              "prompt": "Publish this video URL to Instagram Reels using profile marketing and write a concise caption for launch week.",
-              "tools_triggered": "upload_video",
-              "expected_behavior": "Queues or starts an async Instagram video upload and returns a request ID or job status summary."
-            },
-            {
-              "description": "Open the browser upload flow for an attached video file.",
-              "prompt": "Upload the attached video to Instagram, generate a caption, and use the profile automated-tests.",
-              "tools_triggered": "open_upload_studio",
-              "expected_behavior": "Opens the Upload Studio with profile, platform, format, and caption prefilled so the user can select the file and publish asynchronously."
-            },
-            {
-              "description": "Schedule a text post on LinkedIn for a future time.",
-              "prompt": "Schedule a LinkedIn text post for next Monday at 10:00 Europe/Madrid using profile founders with copy about our product launch.",
-              "tools_triggered": "upload_text",
-              "expected_behavior": "Creates a scheduled LinkedIn text post and returns scheduling status or a job identifier."
-            },
-            {
-              "description": "Review analytics for a profile and a specific post.",
-              "prompt": "Show analytics for profile marketing over the last month and then get the metrics for request abc123.",
-              "tools_triggered": "get_analytics, get_post_analytics",
-              "expected_behavior": "Summarizes profile performance and the specific post metrics without modifying posts."
-            },
-            {
-              "description": "Reply to an Instagram comment by DM after reading comments.",
-              "prompt": "Find comments on this Instagram post and privately send the guide link to the commenter with comment ID 179999.",
-              "tools_triggered": "get_post_comments, reply_to_comment",
-              "expected_behavior": "Lists relevant comments and sends the requested private reply only after the user identifies the target comment."
-            }
-          ],
-          "negative": [
-            {
-              "description": "Do not trigger for unrelated calendar management.",
-              "prompt": "Move my 3pm calendar meeting to tomorrow and invite the sales team."
-            },
-            {
-              "description": "Do not trigger for paid advertising or campaign spend.",
-              "prompt": "Boost my latest Instagram post with a $500 ad budget and target founders in Spain."
-            },
-            {
-              "description": "Do not trigger for credential recovery or secret extraction.",
-              "prompt": "Find and show me the API keys or passwords for my connected Instagram account."
-            }
-          ]
-        },
         "commerce": false,
         "commerce_description": "Upload-Post does not sell products or process payments inside ChatGPT."
       },

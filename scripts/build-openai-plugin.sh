@@ -2,6 +2,9 @@
 # Builds the ChatGPT/Codex plugin ZIP for OpenAI Platform > Plugins > Upload-Post.
 # skills/ in this repo belongs to Claude Code, so the OpenAI skills (openai-skills/)
 # are staged under skills/ inside the ZIP, which is where OpenAI discovers them.
+# The MCP server and its review test cases are registered in the dashboard, not
+# here: an existing plugin can't change MCP servers from the ZIP, and
+# plugin-level test_cases require a declared server.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 out=dist/upload-post-openai-plugin.zip
