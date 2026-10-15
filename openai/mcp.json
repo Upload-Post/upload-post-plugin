@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "app-6a1fed02ff5c8191b4060c5807221f26": {
+      "type": "http",
+      "url": "https://mcp.upload-post.com/mcp"
+    }
+  }
+}
