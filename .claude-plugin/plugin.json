@@ -8,10 +8,11 @@
     "email": "info@upload-post.com",
     "url": "https://upload-post.com"
   },
-  "homepage": "https://upload-post.com",
+  "homepage": "https://www.upload-post.com/claude-social-media/",
   "documentationUrl": "https://docs.upload-post.com/guides/mcp-server-integration",
   "privacyPolicyUrl": "https://www.upload-post.com/data-and-privacy-policy/",
-  "termsOfServiceUrl": "https://www.upload-post.com/terms-of-service/",
+  "supportUrl": "https://docs.upload-post.com/resources/support/",
+  "termsOfServiceUrl": "https://www.upload-post.com/terms-of-use/",
   "icon": "./assets/logo.png",
   "repository": "https://github.com/Upload-Post/upload-post-plugin",
   "license": "MIT",

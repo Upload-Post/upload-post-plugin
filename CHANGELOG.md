@@ -10,7 +10,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Added
 
-- `plugin.json` directory listing fields: `documentationUrl`, `privacyPolicyUrl`, `termsOfServiceUrl` and `icon`.
+- `plugin.json` directory listing fields: `documentationUrl`, `privacyPolicyUrl`, `supportUrl`, `termsOfServiceUrl` and `icon`.
+- `homepage` points at the Claude landing page (`/claude-social-media/`), which covers Claude.ai and Cowork, where most installs come from.
 - README "Try it" section with example prompts.
 
 ### Changed
