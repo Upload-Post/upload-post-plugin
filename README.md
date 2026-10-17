@@ -2,7 +2,7 @@
 
 Schedule, repurpose, and grow on social media — directly from Claude (Claude.ai, Cowork and Claude Code).
 
-The Upload-Post plugin connects Claude Code to the hosted [Upload-Post MCP server](https://docs.upload-post.com/guides/mcp-server-integration) (50 tools) and ships opinionated skills and agents on top. Schedule cross-platform campaigns, turn long videos into viral shorts, work the comment section, build Instagram comment-to-DM funnels, and analyse account performance — without leaving your terminal.
+The Upload-Post plugin connects Claude to the hosted [Upload-Post MCP server](https://docs.upload-post.com/guides/mcp-server-integration) (50 tools) and ships opinionated skills and agents on top. Schedule cross-platform campaigns, turn long videos into viral shorts, work the comment section, build Instagram comment-to-DM funnels, and analyse account performance — without leaving the chat.
 
 **No API key to copy.** The server speaks OAuth 2.1, so installing and authenticating takes two commands and a browser click.
 
@@ -45,9 +45,9 @@ More in [EXAMPLES.md](./EXAMPLES.md).
 
 ### MCP server
 
-The plugin wires the hosted Upload-Post MCP server (`https://mcp.upload-post.com/mcp`) into Claude Code. 50 tools cover uploads (video / photo / text / documents), scheduling and the posting queue, analytics, comments and Google Business reviews, DMs and AutoDMs, FFmpeg encoding jobs, media staging, and account management. See the [MCP integration guide](https://docs.upload-post.com/guides/mcp-server-integration) for the full tool list.
+The plugin wires the hosted Upload-Post MCP server (`https://mcp.upload-post.com/mcp`) into Claude. 50 tools cover uploads (video / photo / text / documents), scheduling and the posting queue, analytics, comments and Google Business reviews, DMs and AutoDMs, FFmpeg encoding jobs, media staging, and account management. See the [MCP integration guide](https://docs.upload-post.com/guides/mcp-server-integration) for the full tool list.
 
-Authentication is OAuth 2.1 with dynamic client registration (RFC 7591) and PKCE — Claude Code registers itself, opens the approval page, and stores the token. Nothing to paste. Revoke any time from **Connected Apps** in the dashboard.
+Authentication is OAuth 2.1 with dynamic client registration (RFC 7591) and PKCE — Claude registers itself, opens the approval page, and stores the token. Nothing to paste. Revoke any time from **Connected Apps** in the dashboard.
 
 ## Why this plugin (vs. alternatives)
 
@@ -159,10 +159,10 @@ Grab a key at [app.upload-post.com/settings/api](https://app.upload-post.com/set
 
 | Symptom | Likely cause | Fix |
 | :------ | :----------- | :-- |
-| No `upload-post` tools available | Not authenticated yet | `/mcp` → `upload-post` → **Authenticate** |
-| Every tool returns 401 | OAuth token revoked or expired | Re-authenticate with `/mcp`. Check **Connected Apps** in the dashboard |
+| No `upload-post` tools available | Not authenticated yet | Claude.ai / Cowork: Customize → Connectors → Upload-Post → **Connect**. Claude Code: `/mcp` → `upload-post` → **Authenticate** |
+| Every tool returns 401 | OAuth token revoked or expired | Reconnect as above. Check **Connected Apps** in the dashboard |
 | OAuth browser tab never opens | Proxy or VPN blocking the host | `curl -sI https://mcp.upload-post.com/.well-known/oauth-protected-resource` should return 200 |
-| `list_users` returns empty | No social accounts linked yet | Connect them at [app.upload-post.com/manage-users](https://app.upload-post.com/manage-users) |
+| `list_users` returns empty | No social accounts linked yet | Ask Claude for a connection link, or connect them at [app.upload-post.com/manage-users](https://app.upload-post.com/manage-users) |
 | Upload fails with `quota_exceeded` | Free-plan daily limit hit | Wait until quota resets or upgrade |
 | Scheduled post never went out | Token for that account expired | The `post-debugger` agent will diagnose; usually reconnect from [manage-users](https://app.upload-post.com/manage-users) |
 

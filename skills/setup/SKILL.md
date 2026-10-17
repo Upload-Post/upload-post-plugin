@@ -14,7 +14,7 @@ Call `get_account_info`. It is the cheapest call: it validates the session and r
 - **It works**: move to step 2 without comment.
 - **The tools are missing or it returns an auth error**: Upload-Post is not connected yet. Tell the user how to connect it where they are:
   - **Claude.ai or the desktop app (including Cowork)**: Customize → Connectors → Upload-Post → *Connect*.
-  - **Claude Code**: run `/mcp`, select `upload-post` and choose *Authenticate*.
+  - **Claude Code**: run `/mcp`, select `upload-post` and choose *Authenticate*. If `upload-post` is not listed, the plugin may be disabled: check `/plugin` and restart Claude Code.
 
   A browser tab opens on `app.upload-post.com`; they log in or sign up (free plan, no card) and approve. Then call `get_account_info` again.
 - **Network error**: a proxy or VPN may block `mcp.upload-post.com`.
@@ -40,7 +40,7 @@ Do not use the `whitelabel-connect` skill here. It is for generating links for c
 
 ## 4. First post
 
-Once at least one network is connected, offer a first post straight away instead of a menu. Ask what they want to share, or suggest a short text post to a connected network, and run it with the `schedule-campaign` skill. A scheduled post counts too.
+Once at least one network is connected, offer a first post straight away instead of a menu. Ask what they want to share, or suggest a short text post to a connected network, and run it with the `schedule-campaign` skill. A scheduled post counts too. Publishing is public: show the final text, networks and time, and publish only after the user confirms.
 
 If they would rather do something else, suggest the skill that fits what they mentioned:
 
