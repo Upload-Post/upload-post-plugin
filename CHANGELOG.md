@@ -6,6 +6,23 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+## [0.4.0] — 2026-10-17
+
+### Added
+
+- `plugin.json` directory listing fields: `documentationUrl`, `privacyPolicyUrl`, `termsOfServiceUrl` and `icon`.
+- README "Try it" section with example prompts.
+
+### Changed
+
+- Shorter plugin description that leads with what it does, for the directory card.
+- `setup` skill works on Claude.ai, the desktop app and Cowork as well as Claude Code (connect from Customize → Connectors), connects social accounts through `get_connect_link` instead of sending the user to the dashboard, and ends by offering a first post.
+- `setup` no longer suggests the local `npx` server with `UPLOAD_POST_API_KEY`; API-key setups stay documented in the README for CI and headless use.
+
+### Fixed
+
+- `autodm-architect` and the README no longer describe a public reply under the comment: AutoDM sends the DM only, with up to 3 link buttons.
+
 ## [0.3.0] — 2026-10-02
 
 ### Added

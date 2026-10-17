@@ -1,12 +1,26 @@
-# Upload-Post for Claude Code, Cursor, Gemini CLI, Grok Bot and Grok Build
+# Upload-Post for Claude, Cursor, Gemini CLI, Grok Bot and Grok Build
 
-Schedule, repurpose, and grow on social media — directly from Claude Code.
+Schedule, repurpose, and grow on social media — directly from Claude (Claude.ai, Cowork and Claude Code).
 
 The Upload-Post plugin connects Claude Code to the hosted [Upload-Post MCP server](https://docs.upload-post.com/guides/mcp-server-integration) (50 tools) and ships opinionated skills and agents on top. Schedule cross-platform campaigns, turn long videos into viral shorts, work the comment section, build Instagram comment-to-DM funnels, and analyse account performance — without leaving your terminal.
 
 **No API key to copy.** The server speaks OAuth 2.1, so installing and authenticating takes two commands and a browser click.
 
 **Free plan, no credit card required.** Try it before you decide.
+
+## Try it
+
+After installing, ask Claude things like:
+
+- "Connect my Instagram and TikTok to Upload-Post."
+- "Post this video to TikTok, Instagram Reels and YouTube Shorts tomorrow at 6 pm."
+- "Schedule this announcement on LinkedIn and X for Monday at 9:00."
+- "Cut this podcast episode into five shorts and schedule one a day."
+- "Reply to the new comments on my last Instagram post."
+- "When someone comments GUIDE on this reel, DM them the download link."
+- "Which of my posts did best this month, and what should I post next?"
+
+More in [EXAMPLES.md](./EXAMPLES.md).
 
 ## What's inside
 
@@ -20,13 +34,13 @@ The Upload-Post plugin connects Claude Code to the hosted [Upload-Post MCP serve
 | `/upload-post:repurpose-video` | Take a long video, transcribe it, pick viral moments, cut clips with FFmpeg, optionally add hook overlays, then schedule to TikTok / Reels / Shorts. |
 | `/upload-post:posting-queue` | Set up a recurring weekly posting rhythm (slots, days, timezone) and see what lands in the next slot. |
 | `/upload-post:manage-comments` | Read, triage, reply to and moderate comments on Instagram / Facebook / YouTube / LinkedIn / TikTok / X / Threads / Bluesky, plus Google Business reviews. |
-| `/upload-post:autodm-setup` | Build an Instagram comment-to-DM funnel: keyword trigger → public reply → private DM. |
+| `/upload-post:autodm-setup` | Build an Instagram comment-to-DM funnel: keyword trigger → private DM with up to 3 link buttons. |
 | `/upload-post:analyze-performance` | Pull analytics across accounts, identify what is working, and propose concrete next moves. |
 
 ### Agents
 
 - **`content-strategist`** — reads your analytics and proposes 3–5 specific next posts.
-- **`autodm-architect`** — designs full comment-to-DM funnels (trigger + public reply + DM body + CTA).
+- **`autodm-architect`** — designs full comment-to-DM funnels (trigger + DM body + link buttons + CTA).
 - **`post-debugger`** — diagnoses failed uploads, expired tokens, and quota errors.
 
 ### MCP server
@@ -87,9 +101,11 @@ claude --plugin-dir ./upload-post-plugin
 
 ## Configure
 
-1. Run `/mcp`, pick `upload-post`, choose **Authenticate**. A browser tab opens; log in or create a free account (no card) and approve.
+1. Connect Upload-Post. A browser tab opens; log in or create a free account (no card) and approve.
+   - **Claude.ai, desktop app or Cowork:** Customize → Connectors → Upload-Post → **Connect**.
+   - **Claude Code:** run `/mcp`, pick `upload-post`, choose **Authenticate**.
 
-2. Back in Claude Code, run `/upload-post:setup`. It verifies the connection and lists any accounts you have already linked.
+2. Ask Claude to set up Upload-Post (or run `/upload-post:setup` in Claude Code). It verifies the connection, gives you a one-click link to connect your social accounts and helps you publish your first post.
 
 That's it — there is no API key to copy and no environment variable to export.
 

@@ -1,54 +1,53 @@
 ---
 name: setup
-description: Onboard a new Upload-Post user. Authenticate the hosted MCP server over OAuth, verify the connection, and confirm that at least one social account is connected. Use when the user first installs the plugin, asks how to get started, says the plugin is not working, or runs /upload-post:setup.
+description: Get a new Upload-Post user from install to their first published or scheduled post. Check the connection, list profiles and connected social accounts, hand over a one-click link to connect TikTok, Instagram, YouTube, LinkedIn, X and the rest, then offer a first post. Use when the user first installs the plugin, asks how to get started or how to connect a social network, says the plugin is not working, when no account is connected, or runs /upload-post:setup.
 ---
 
 # Upload-Post setup
 
-Walk the user through three checks. Stop as soon as one fails and help them fix it before moving on.
+The goal is the user's first post, not a checklist. Run the checks quietly, stop only where something is missing, and fix it with them before moving on.
 
-## 1. Authentication
+## 1. Connection
 
-The plugin points at the hosted MCP server (`https://mcp.upload-post.com/mcp`). There is **no API key to copy and no env var to export** — the server speaks OAuth 2.1 with dynamic client registration, so Claude Code handles it.
+Call `get_account_info`. It is the cheapest call: it validates the session and returns the account and plan state.
 
-Check the connection state with `/mcp`. Expected states:
+- **It works**: move to step 2 without comment.
+- **The tools are missing or it returns an auth error**: Upload-Post is not connected yet. Tell the user how to connect it where they are:
+  - **Claude.ai or the desktop app (including Cowork)**: Customize → Connectors → Upload-Post → *Connect*.
+  - **Claude Code**: run `/mcp`, select `upload-post` and choose *Authenticate*.
 
-- **connected** — nothing to do, move to step 2.
-- **needs authentication** — tell the user to run `/mcp`, select `upload-post`, and choose *Authenticate*. A browser tab opens on `app.upload-post.com/oauth/authorize`; they log in (or sign up — the free plan needs no card) and approve. The tab closes itself and the tools become available.
-- **failed / not listed** — the plugin may not be enabled. Have them check `/plugin` and restart Claude Code.
+  A browser tab opens on `app.upload-post.com`; they log in or sign up (free plan, no card) and approve. Then call `get_account_info` again.
+- **Network error**: a proxy or VPN may block `mcp.upload-post.com`.
 
 The user can revoke access at any time from **Connected Apps** in the Upload-Post dashboard.
 
-> **API-key alternative.** Users who prefer a long-lived key (CI, headless, shared machines) can skip OAuth by adding their own MCP entry with an `Authorization: ApiKey <key>` header, or by running the stdio server `npx -y @upload-post/mcp` with `UPLOAD_POST_API_KEY`. Only bring this up if the user asks for it or OAuth is blocked in their environment.
+## 2. Profiles and social accounts
 
-## 2. MCP connection
+Call `list_users`. Upload-Post groups social accounts under **profiles** (one per brand or client). Each profile has a `username` and the networks connected to it. Almost every upload, analytics, comment and DM tool takes that `username` as `user`. Never invent a profile name.
 
-Call `get_account_info`. It is the cheapest call — it validates the session and returns the account state. If it succeeds, the connection is live.
+- One profile: use it without asking.
+- Several: ask which one before anything that writes.
 
-- **401 / auth error** — the OAuth token was revoked or expired. Re-run `/mcp` → *Authenticate*.
-- **Network error** — the user may be behind a proxy or VPN that blocks `mcp.upload-post.com`. Verify with `curl -sI https://mcp.upload-post.com/.well-known/oauth-protected-resource`.
+Summarise it in one line: profile → connected networks.
 
-## 3. Profiles and connected accounts
+## 3. Connect a social account
 
-Upload-Post groups social accounts under **profiles** (one workspace can have many). Call `list_users` to enumerate them. Each entry has a `username` (the profile name) and a `social_accounts` map showing what is connected per platform.
+If there is no profile, nothing is connected, or the network the user wants is missing or needs reconnecting, call `get_connect_link` and give the user its `connect_url`. With no profile it creates one and returns a one-click link; otherwise it opens the page where they click each network and approve.
 
-Almost every upload, analytics, comment, and DM tool takes a `user` parameter set to one of these profile usernames. If the user has only one profile, default to it silently. If they have several, ask which one to use before running anything that writes.
+Ask them to tell you when they are done, then call `list_users` again to confirm. A response with `next_step` or `connect_url` (for example `reauth_required`) means the same thing: pass the link on instead of retrying.
 
-If `list_users` returns an empty list, or no profile has any connected platform, tell the user to do it from the web in 30 seconds:
+Do not use the `whitelabel-connect` skill here. It is for generating links for clients in a white-label or agency setup, not for the user's own accounts.
 
-```
-https://app.upload-post.com/manage-users
-```
+## 4. First post
 
-There they create a profile, click each platform they want to post to, and accept the OAuth prompt. A couple of clicks per network. Do not run the `whitelabel-connect` skill in this case — that is for generating connection URLs for clients in a white-label / agency setup, not for connecting the user's own accounts.
+Once at least one network is connected, offer a first post straight away instead of a menu. Ask what they want to share, or suggest a short text post to a connected network, and run it with the `schedule-campaign` skill. A scheduled post counts too.
 
-## Wrap-up
+If they would rather do something else, suggest the skill that fits what they mentioned:
 
-When all three checks pass, give a one-line summary and suggest the next move based on what the user mentioned:
+- A repeating posting rhythm → `posting-queue`
+- A long video → `repurpose-video`
+- Leads from Instagram comments → `autodm-setup`
+- Comments or reviews piling up → `manage-comments`
+- Understanding their numbers → `analyze-performance`
 
-- Has content to post → `/upload-post:schedule-campaign`
-- Wants a repeating posting rhythm → `/upload-post:posting-queue`
-- Has a long video → `/upload-post:repurpose-video`
-- Wants leads from Instagram → `/upload-post:autodm-setup`
-- Has comments or reviews piling up → `/upload-post:manage-comments`
-- Wants to understand their numbers → `/upload-post:analyze-performance`
+If a tool reports that the plan limit was reached, say so plainly and point to https://app.upload-post.com to manage the plan; do not retry.
