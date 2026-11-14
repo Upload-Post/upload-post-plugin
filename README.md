@@ -2,7 +2,7 @@
 
 Schedule, repurpose, and grow on social media — directly from Claude (Claude.ai, Cowork and Claude Code).
 
-The Upload-Post plugin connects Claude to the hosted [Upload-Post MCP server](https://docs.upload-post.com/guides/mcp-server-integration) (50 tools) and ships opinionated skills and agents on top. Schedule cross-platform campaigns, turn long videos into viral shorts, work the comment section, build Instagram comment-to-DM funnels, and analyse account performance — without leaving the chat.
+The Upload-Post plugin connects Claude to the hosted [Upload-Post MCP server](https://docs.upload-post.com/guides/mcp-server-integration) and ships opinionated skills and agents on top. Schedule cross-platform campaigns, turn long videos into viral shorts, work the comment section, build Instagram comment-to-DM funnels, and analyse account performance — without leaving the chat.
 
 **No API key to copy.** The server speaks OAuth 2.1, so installing and authenticating takes two commands and a browser click.
 
@@ -18,6 +18,8 @@ After installing, ask Claude things like:
 - "Cut this podcast episode into five shorts and schedule one a day."
 - "Reply to the new comments on my last Instagram post."
 - "When someone comments GUIDE on this reel, DM them the download link."
+- "DM the guide to anyone who comments GUIDE on any of my posts or replies to my stories."
+- "Did my webhook for yesterday's upload reach my server?"
 - "Which of my posts did best this month, and what should I post next?"
 
 More in [EXAMPLES.md](./EXAMPLES.md).
@@ -33,8 +35,8 @@ More in [EXAMPLES.md](./EXAMPLES.md).
 | `/upload-post:schedule-campaign` | Schedule a post across multiple platforms at once. Handles per-platform validation (aspect ratio, length, Facebook pages, Pinterest boards). |
 | `/upload-post:repurpose-video` | Take a long video, transcribe it, pick viral moments, cut clips with FFmpeg, optionally add hook overlays, then schedule to TikTok / Reels / Shorts. |
 | `/upload-post:posting-queue` | Set up a recurring weekly posting rhythm (slots, days, timezone) and see what lands in the next slot. |
-| `/upload-post:manage-comments` | Read, triage, reply to and moderate comments on Instagram / Facebook / YouTube / LinkedIn / TikTok / X / Threads / Bluesky, plus Google Business reviews. |
-| `/upload-post:autodm-setup` | Build an Instagram comment-to-DM funnel: keyword trigger → private DM with up to 3 link buttons. |
+| `/upload-post:manage-comments` | Read, triage, reply to and moderate comments (and the replies under them) on Instagram / Facebook / YouTube / LinkedIn / TikTok / X / Threads / Bluesky, read and send Instagram and Bluesky DMs, plus Google Business reviews. |
+| `/upload-post:autodm-setup` | Build an Instagram comment-to-DM funnel: keyword trigger → private DM with up to 3 link buttons, on one post or on the whole account (every post, story replies, story mentions, keyword DMs). |
 | `/upload-post:analyze-performance` | Pull analytics across accounts, identify what is working, and propose concrete next moves. |
 
 ### Agents
@@ -45,7 +47,7 @@ More in [EXAMPLES.md](./EXAMPLES.md).
 
 ### MCP server
 
-The plugin wires the hosted Upload-Post MCP server (`https://mcp.upload-post.com/mcp`) into Claude. 50 tools cover uploads (video / photo / text / documents), scheduling and the posting queue, analytics, comments and Google Business reviews, DMs and AutoDMs, FFmpeg encoding jobs, media staging, and account management. See the [MCP integration guide](https://docs.upload-post.com/guides/mcp-server-integration) for the full tool list.
+The plugin wires the hosted Upload-Post MCP server (`https://mcp.upload-post.com/mcp`) into Claude. Its tools cover uploads (video / photo / text / documents), scheduling and the posting queue, analytics, comments and Google Business reviews, Instagram and Bluesky DMs, AutoDM monitors and account-wide rules, webhook delivery history and redelivery, LinkedIn mentions, FFmpeg encoding jobs, media staging, and account management. See the [MCP integration guide](https://docs.upload-post.com/guides/mcp-server-integration) for the full tool list.
 
 Authentication is OAuth 2.1 with dynamic client registration (RFC 7591) and PKCE — Claude registers itself, opens the approval page, and stores the token. Nothing to paste. Revoke any time from **Connected Apps** in the dashboard.
 
@@ -169,7 +171,7 @@ Grab a key at [app.upload-post.com/settings/api](https://app.upload-post.com/set
 ## Documentation
 
 - [Quick start](./QUICK_START.md) — install, authenticate, publish, in about two minutes.
-- [Features](./FEATURES.md) — platform support matrix by content type, all 50 tools by family, and the known limitations.
+- [Features](./FEATURES.md) — platform support matrix by content type, the tools by family, and the known limitations.
 - [Examples](./EXAMPLES.md) — real prompts and what the plugin does with them.
 - [Changelog](./CHANGELOG.md) — what changed between versions.
 

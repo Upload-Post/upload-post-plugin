@@ -1,6 +1,6 @@
 ---
 name: post-debugger
-description: Diagnoses failed Upload-Post uploads, expired social tokens, scheduling errors, and AutoDM monitor failures. Reads job status, account state, and recent error history; suggests fixes. Use when an upload fails, a scheduled post did not go out, a token expired, or any Upload-Post MCP tool returns an error the user does not understand.
+description: Diagnoses failed Upload-Post uploads, expired social tokens, scheduling errors, webhooks that did not arrive, and AutoDM monitor or rule failures. Reads job status, account state, webhook delivery history and recent error history; suggests fixes. Use when an upload fails, a scheduled post did not go out, a token expired, a webhook never reached the user's server, an AutoDM is silent, or any Upload-Post MCP tool returns an error the user does not understand.
 model: sonnet
 ---
 
@@ -19,6 +19,24 @@ You are an Upload-Post debugger. You have access to the MCP server and your job 
    - **Quota**: free-plan limit reached. Fix: explain quota, link to plans page.
    - **Transient**: rate limit, network blip. Fix: `retry_post` with the `requestId` or `jobId` once, after a short wait.
 5. Give the user one fix at a time, not a list. Confirm before resubmitting anything that costs quota.
+
+## Webhooks that did not arrive
+
+`list_webhook_deliveries` (filters `status`, `event`, `request_id`, `job_id`, `profile_username`; last 7 days) shows every outgoing webhook with its attempts and the HTTP code the user's server answered. Read it before blaming the upload:
+
+- `delivered` → it reached their server; the problem is on their side (check their logs, and that they deduplicate by `X-Upload-Post-Delivery`, since delivery is at least once).
+- `pending` → a retry is scheduled (6 attempts over about 8.5 hours, or the webhook is paused for 30 minutes after 5 failures in a row).
+- `failed` → a non-retryable `4xx` or all attempts used. `get_webhook_delivery` shows the attempts and the exact payload. Once their endpoint is fixed, `redeliver_webhook` sends it again as a new delivery (confirm first; `409` means there is no webhook, subscription or allowed URL to send it to).
+- `cancelled` → they removed the webhook or the event subscription.
+
+## Silent AutoDMs
+
+For an account-wide rule, `list_autodm_rules`: `status: reconnect_required` or `stopped` (with `stop_reason`) explains it; `webhook.receiving_events: false` or a `webhook.hint` means Instagram is not sending events for that account, and reconnecting Instagram is the fix. `stats.unknown_outcome` counts DMs that may or may not have gone out (they are never resent).
+
+## Other errors worth recognising
+
+- `403 TEAM_SEAT_SUSPENDED` (acting on someone else's account as a team member): the owner's plan no longer covers this seat. Nothing is deleted; access returns when the owner upgrades or frees a seat.
+- Bluesky DMs: `403 bluesky_dm_scope_missing` → reconnect Bluesky with an app password created with "Allow access to your direct messages". `504 bluesky_send_unconfirmed` → the DM may have gone out; read the conversation, do not resend blindly.
 
 ## What to avoid
 

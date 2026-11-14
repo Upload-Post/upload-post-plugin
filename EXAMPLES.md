@@ -107,6 +107,19 @@ How many DMs did my funnels send this week?
 
 `manage_autodms` with `action: "status"`.
 
+```text
+Send my free guide to anyone who comments GUIDE on any post, now or in the future,
+and to anyone who replies to my stories with GUIDE.
+```
+
+`create_autodm_rule` with `triggers: ["comment", "story_reply"]` and `trigger_keywords: ["GUIDE"]`: an account-wide rule that never expires. `list_autodm_rules` later shows its counters and whether Instagram is sending events.
+
+```text
+Answer my unread Bluesky DMs.
+```
+
+`list_dm_conversations` with `platform: "bluesky"` and `read_state: "unread"`, drafts the answers for approval, then `send_dm` with the `conversation_id`.
+
 ## Analytics
 
 ```text
@@ -134,6 +147,12 @@ This upload failed twice with the same error.
 ```
 
 It will stop retrying and investigate instead. `retry_post` replays the same payload, so if the payload is what is broken, retrying cannot help.
+
+```text
+My server never got the webhook for this morning's upload.
+```
+
+`list_webhook_deliveries` filtered by `request_id` shows each attempt and the HTTP code your server answered; once your endpoint is fixed, `redeliver_webhook` sends it again.
 
 ## Agency / white-label
 
