@@ -25,9 +25,9 @@ Call the analytics tools in parallel:
 - `get_analytics` with `profileUsername` — overall snapshot for the profile.
 - `get_total_impressions` with `profileUsername` — headline number across platforms.
 - `get_platform_metrics` — per-platform breakdown for the workspace.
-- `get_post_analytics` with `requestId` — deep dive on a specific upload.
+- `get_post_analytics` with `requestId` — deep dive on a specific upload; or with `platformPostId` + `platform` + `user` for any post of the account (for example one from `get_media`). A TikTok draft has metrics only once the creator publishes it as public from the TikTok app; a draft published as private never gets per-post analytics.
 - `get_history` — paginated log of what was actually published, and when. Use it to build the denominator (posting cadence) that the engagement numbers hang off.
-- `manage_autodms` with `action: "status"` and `user` — AutoDM counters, if any are running.
+- `manage_autodms` with `action: "status"` and `user` — AutoDM counters, if any are running; `list_autodm_rules` for account-wide rules (`stats` per trigger).
 
 For qualitative signal, `get_post_comments` on the top and bottom post is worth more than another metric: what people actually said explains the numbers.
 

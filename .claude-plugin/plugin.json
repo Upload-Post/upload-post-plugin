@@ -1,7 +1,7 @@
 {
   "name": "upload-post",
   "displayName": "Upload-Post",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Publish and schedule posts to TikTok, Instagram, YouTube, LinkedIn, X and 17 more platforms from Claude. Turn long videos into shorts, reply to comments, run Instagram comment-to-DM funnels and track analytics. One-click OAuth, free plan with no credit card.",
   "author": {
     "name": "Upload-Post",

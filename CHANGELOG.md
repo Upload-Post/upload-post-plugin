@@ -6,6 +6,28 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+## [0.5.0] — 2026-11-14
+
+Needs the Upload-Post MCP server release that adds account-wide AutoDM rules, webhook delivery tools, Bluesky DMs and `resolve_linkedin_organization`.
+
+### Added
+
+- `autodm-setup`: account-wide Instagram AutoDM rules (`create_autodm_rule`, `list_autodm_rules`, `pause_autodm_rule`, `resume_autodm_rule`, `delete_autodm_rule`): every post and reel, story replies, story mentions and keyword DMs, no expiry, with limits, cooldowns, webhook health and errors. `autodm-architect` helps choose between a per-post monitor and a rule.
+- `manage-comments`: Instagram and Bluesky DMs (`list_dm_conversations`, `send_dm`: handles/DIDs, conversation ids, shared posts, sender actions, the DM-enabled app password and `bluesky_send_unconfirmed`), and the replies under a comment on Instagram, Facebook and LinkedIn with their id formats and errors.
+- `post-debugger`: webhooks that did not arrive (`list_webhook_deliveries`, `get_webhook_delivery`, `redeliver_webhook`), silent AutoDM rules, `TEAM_SEAT_SUSPENDED` and Bluesky DM errors.
+- `schedule-campaign`: LinkedIn mentions with `resolve_linkedin_organization`; Bluesky galleries of up to 10 images.
+- `analyze-performance`: `get_post_analytics` by `platformPostId`, TikTok drafts, AutoDM rule stats.
+- The same changes in the ChatGPT/Codex skills (`instagram-auto-dm`, `reply-to-comments`, `schedule-social-posts`, `social-media-analytics`) and in `GEMINI.md`.
+
+### Fixed
+
+- `unpublish_post` is not available on Threads (it was listed as supported); Instagram is explained.
+- `FEATURES.md` no longer says TikTok comments are unsupported or that AutoDM posts a public reply, and drops the stale tool count.
+
+### Versions
+
+- Claude Code, Cursor, Grok and Gemini manifests 0.5.0; ChatGPT/Codex plugin 1.2.0.
+
 ## [0.4.0] — 2026-10-17
 
 ### Added

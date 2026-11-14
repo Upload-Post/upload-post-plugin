@@ -1,11 +1,15 @@
 ---
 name: autodm-setup
-description: Set up an Instagram comment-to-DM funnel. The user picks a live post, optional trigger keywords, and a private DM (with up to 3 link buttons). Commenters whose comment matches get the DM automatically. Use when the user mentions comment funnel, auto-DM, lead magnet from comments, keyword-triggered DM, DM automation, or wants to capture leads from Instagram comments.
+description: Set up an Instagram comment-to-DM funnel, on one live post or on the whole account. The user picks the post (or every post, story replies, story mentions and keyword DMs with an account-wide rule), optional trigger keywords, and a private DM (with up to 3 link buttons). People who match get the DM automatically. Use when the user mentions comment funnel, auto-DM, lead magnet from comments, keyword-triggered DM, DM automation, or wants to capture leads from Instagram comments.
 ---
 
 # Set up a comment-to-DM funnel
 
 The Upload-Post AutoDM feature watches an Instagram post for new comments. When a comment matches the trigger keywords, the commenter gets a private DM with whatever payload the creator wants (a link, a lead magnet, a discount code). AutoDM sends the DM only — it does not post a public reply under the comment.
+
+## 0. One post or the whole account?
+
+Ask which one the user means. One post (a launch, a lead magnet on a single reel) → a monitor, steps 1-6. Every post, or stories and DMs too → an account-wide rule, see [the rules section](#whole-account-instead-of-one-post-autodm-rules).
 
 ## 1. Pick the post and profile
 
@@ -55,6 +59,20 @@ After it is live:
 - `list_dm_conversations` → broader view of all DMs the profile has sent, including manual ones.
 
 Surface the unique-commenters count, not just total DMs sent — repeat commenters skew the headline number.
+
+## Whole account instead of one post: AutoDM rules
+
+A monitor watches **one** post and stops after 15 days. When the user wants "every post", "all my reels", story replies, story mentions or DMs with a keyword, create an **account-wide rule** instead. A rule covers every post and reel of the Instagram account, present and future, never expires and does not count toward the 2 monitors per profile per day.
+
+- `create_autodm_rule` with `profile_username`, `reply_message` (up to 1000 characters, 640 with `buttons`), optional `triggers`, `trigger_keywords`, `buttons` (up to 3) and `per_user_cooldown_hours`.
+- `triggers`: `comment` (default), `story_reply`, `story_mention`, `dm_keyword`. `dm_keyword` needs `trigger_keywords`, otherwise every DM would be answered. A story mention carries no text, so keywords do not apply to it.
+- `per_user_cooldown_hours`: whole hours, 0-720, default 24. The same person gets at most one DM from the rule in that window, whatever they comment on. Story and DM triggers never go below 24 hours, so two bots cannot answer each other in a loop.
+- Limits: up to 10 rules per Instagram account; 25 DMs per account every 15 minutes plus the plan's daily DM allowance (overflow is queued for up to 24 hours); one DM per comment. A post that has its own monitor is answered by that monitor, not by the rule.
+- Rules run on Instagram webhooks only. Creating one subscribes the account; if Instagram refuses, nothing is created and the call returns `502 webhook_subscription_failed`: the user has to reconnect Instagram. Other errors: `409 duplicate_rule` (an identical rule exists, its `rule_id` comes back), `rule_limit_reached`, `rule_creation_in_progress` (retry in a few seconds), `503 account_rules_disabled`.
+- `list_autodm_rules` (optional `profile_username`) shows each rule's `status` (`active`, `paused`, `reconnect_required`, `stopped` with a `stop_reason` such as `account_moved`, `disabled`), its `stats`, queued `pending` DMs and `webhook` health. If `webhook.receiving_events` is false or `webhook.hint` is set, tell the user plainly: Instagram is not sending events for that account, so the rule cannot fire.
+- `pause_autodm_rule`, `resume_autodm_rule`, `delete_autodm_rule` take `rule_id`. A `stopped` rule only resumes once its Instagram account is connected to the same profile again (`409 rule_stopped` otherwise). Confirm before deleting.
+
+Read back the triggers, keywords and DM text before creating a rule: it sends DMs as the user, with nobody reviewing each one, until it is paused.
 
 ## Compliance
 

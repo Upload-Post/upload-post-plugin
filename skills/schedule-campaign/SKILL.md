@@ -23,7 +23,8 @@ Each platform has constraints. Catch the obvious ones before calling the API:
 
 - **TikTok / Reels / Shorts**: vertical 9:16 video, ≤ 60s for Reels/Shorts, ≤ 3min for TikTok.
 - **X**: text ≤ 280 chars unless premium; video ≤ 2:20.
-- **LinkedIn**: needs a page id if posting as a company — call `get_linkedin_pages` first.
+- **LinkedIn**: needs a page id if posting as a company — call `get_linkedin_pages` first. Mentions go in the LinkedIn text as `@[Exact Page Name](urn:li:organization:ID)`, `@[Name](urn:li:person:ID)` or `@company-vanity`. A company name must match LinkedIn exactly, capitals included, or it is published as plain text: get the urn and exact name with `resolve_linkedin_organization` (`user`, `url` = the Page URL or vanity) and paste its `mention`. For photos and videos put mentions in the description, not only the title.
+- **Bluesky**: 4 images per post; with `platformOptions.blueskyGallery: true` up to 10 as a gallery. Extra images are dropped with a warning, the post does not fail.
 - **Reddit**: publishing is currently unavailable (`reddit_unavailable`) until the Reddit app is restored. Do not include it as a target; if the user asks for Reddit, say so and offer the other platforms.
 - **Facebook**: needs a page id — call `get_facebook_pages`.
 - **Pinterest**: needs a board id — call `get_pinterest_boards`.
@@ -61,5 +62,5 @@ If the user asks "what do I have scheduled", call `list_scheduled`. To change a 
 ## After the fact
 
 - **A platform failed** → `retry_post` with the `requestId` (async upload) or `jobId` (scheduled/queued). It re-runs the same payload; do not rebuild the campaign by hand.
-- **The user wants a published post taken down** → `unpublish_post` with `user`, `platform` and `postId`. It is destructive and irreversible, so confirm first. Only facebook, youtube, x, linkedin and threads are supported — Instagram and TikTok deletions must be done in the native app.
+- **The user wants a published post taken down** → `unpublish_post` with `user`, `platform` and `postId`. It is destructive and irreversible, so confirm first. Instagram, TikTok and Threads cannot be unpublished through Upload-Post (Instagram only allows it to apps connected with Facebook Login, and Upload-Post uses Instagram Login): those deletions must be done in the native app.
 - **The user wants to see what is already live on an account** → `get_media` pulls recent posts straight from the connected platform, useful to avoid reposting the same thing.

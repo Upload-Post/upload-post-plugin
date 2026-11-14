@@ -12,7 +12,8 @@ Call `list_users` for the profile `username` and its connected accounts. One pro
 Some networks need a target first:
 
 - Facebook Page: `get_facebook_pages`, then `facebookPageId` in `platformOptions`.
-- LinkedIn company Page: `get_linkedin_pages`, then `linkedinPageId`.
+- LinkedIn company Page: `get_linkedin_pages`, then `linkedinPageId`. To @mention a company, write `@[Exact Page Name](urn:li:organization:ID)` (or `@company-vanity`) in the LinkedIn text; get the exact name and urn with `resolve_linkedin_organization`. A name that does not match LinkedIn exactly, capitals included, is published as plain text.
+- Bluesky: 4 images per post, up to 10 as a gallery with `platformOptions.blueskyGallery: true`.
 - Pinterest board: `get_pinterest_boards`.
 - Google Business location: `get_google_business_locations`, then `googleBusinessLocationId` in `platformOptions`.
 
@@ -41,6 +42,6 @@ Report each network with its scheduled time or status (`get_status` on the `requ
 - "What's scheduled?" → `list_scheduled`.
 - Change the time or text → `edit_scheduled` with `jobId` (`scheduledDate`, `timezone`, `title`, `caption`, or `platformContent` for one network). Do not create a duplicate.
 - Cancel → `cancel_scheduled` with `jobId`. Confirm first; it cannot be undone.
-- Published already → `get_history`. A failed network → `retry_post`. Take a post down → `unpublish_post` (Facebook, YouTube, X, LinkedIn, Threads only; confirm first).
+- Published already → `get_history`. A failed network → `retry_post`. Take a post down → `unpublish_post` (not Instagram, TikTok or Threads; confirm first).
 
 Reddit publishing is currently unavailable.

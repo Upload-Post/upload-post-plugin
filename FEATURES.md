@@ -1,6 +1,6 @@
 # Features
 
-Everything this plugin exposes, and which platform supports what. Verified against Upload-Post MCP server **0.6.1** (50 tools).
+Everything this plugin exposes, and which platform supports what. Verified against the Upload-Post MCP server tool set of November 2026.
 
 ## Platform support by content type
 
@@ -43,8 +43,8 @@ Support differs per content type — a platform in the video column is not autom
 | `schedule-campaign` | Cross-platform publishing with per-platform validation and options |
 | `posting-queue` | Recurring weekly slots, timezone, next-slot preview |
 | `repurpose-video` | Long video → transcript → viral moments → cut clips → scheduled shorts |
-| `manage-comments` | Read, triage, reply and moderate comments; Google Business reviews |
-| `autodm-setup` | Instagram comment-to-DM funnels (keyword → public reply → private DM) |
+| `manage-comments` | Read, triage, reply and moderate comments and their replies; Instagram and Bluesky DMs; Google Business reviews |
+| `autodm-setup` | Instagram comment-to-DM funnels: one post (monitor) or the whole account (rule: every post, story replies, story mentions, keyword DMs) |
 | `analyze-performance` | Analytics across accounts, interpreted, with a concrete next move |
 | `whitelabel-connect` | JWT connection links so your clients OAuth into your workspace |
 
@@ -54,11 +54,11 @@ Support differs per content type — a platform in the video column is not autom
 | :-- | :-- |
 | `content-strategist` | Reads your analytics, proposes 3–5 specific next posts |
 | `autodm-architect` | Designs full comment-to-DM funnels end to end |
-| `post-debugger` | Root-causes failed uploads, expired tokens, quota errors |
+| `post-debugger` | Root-causes failed uploads, expired tokens, quota errors, missing webhooks, silent AutoDMs |
 
 ## Tool families
 
-The MCP server groups its 50 tools as follows.
+The MCP server groups its tools as follows (main ones).
 
 **Publishing** — `upload_video`, `upload_photos`, `upload_text`, `upload_document`. Each accepts a fixed schedule (`scheduledDate` + `timezone`), a queue append (`addToQueue`), or immediate publish, plus per-platform `platformOptions`.
 
@@ -68,11 +68,13 @@ The MCP server groups its 50 tools as follows.
 
 **Analytics** — `get_analytics`, `get_total_impressions`, `get_post_analytics`, `get_platform_metrics`, `get_reddit_detailed_posts`.
 
-**Comments & reviews** — `get_post_comments`, `create_comment`, `delete_comment`, `public_reply_to_comment`, `reply_to_comment`, `get_google_business_reviews`, `reply_to_google_business_review`.
+**Comments & reviews** — `get_post_comments` (replies with `commentId`), `create_comment`, `delete_comment`, `comment_action`, `public_reply_to_comment`, `reply_to_comment`, `get_google_business_reviews`, `reply_to_google_business_review`.
 
-**DMs & automation** — `send_dm`, `list_dm_conversations`, `manage_autodms`.
+**DMs & automation** — `send_dm`, `list_dm_conversations` (Instagram and Bluesky), `manage_autodms` (one post), `create_autodm_rule`, `list_autodm_rules`, `pause_autodm_rule`, `resume_autodm_rule`, `delete_autodm_rule` (whole Instagram account).
 
-**Targets & destinations** — `get_facebook_pages`, `get_linkedin_pages`, `get_pinterest_boards`, `get_google_business_locations`.
+**Webhooks** — `list_webhook_deliveries`, `get_webhook_delivery`, `redeliver_webhook`.
+
+**Targets & destinations** — `get_facebook_pages`, `get_linkedin_pages`, `resolve_linkedin_organization` (urn and exact name for LinkedIn mentions), `get_pinterest_boards`, `get_google_business_locations`.
 
 **Profiles & white-label** — `list_users`, `create_user`, `delete_user`, `get_account_info`, `generate_jwt`, `validate_jwt`.
 
@@ -84,8 +86,10 @@ The MCP server groups its 50 tools as follows.
 
 Worth knowing before you plan around them:
 
-- **Comments**: TikTok is not supported at all. `reply_to_comment` (private DM to a commenter) and `public_reply_to_comment` are Instagram-only, and Instagram's private-reply window closes after 7 days.
+- **Comments**: `reply_to_comment` (private DM to a commenter) and `public_reply_to_comment` are Instagram-only, and Instagram's private-reply window closes after 7 days. Replies under a comment can be read on Instagram, Facebook, LinkedIn Pages, TikTok, Threads and YouTube, not on X or Bluesky.
 - **`create_comment` on Instagram** accepts replies only, never top-level comments.
-- **`unpublish_post`** works on Facebook, YouTube, X, LinkedIn and Threads. Instagram and TikTok deletions must be done in the native app.
+- **`unpublish_post`** does not work on Instagram, TikTok or Threads; delete those in the native app.
+- **AutoDM rules** are Instagram-only and run on Instagram webhooks: up to 10 per account, 25 DMs per account every 15 minutes plus the daily DM allowance.
+- **Bluesky DMs** need an app password created with "Allow access to your direct messages". Bluesky galleries take up to 10 images.
 - **`update_queue_settings`** replaces the configuration wholesale rather than merging.
 - **Analytics** cover 9 of the 22 platforms — the rest publish but do not report back.
