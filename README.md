@@ -34,10 +34,11 @@ More in [EXAMPLES.md](./EXAMPLES.md).
 | `/upload-post:whitelabel-connect` | Generate a JWT connection link so a client or end-user can OAuth their socials into a profile inside your workspace — for white-label embeds and agency onboarding. (Connecting your own accounts? Use [app.upload-post.com/manage-users](https://app.upload-post.com/manage-users) — a couple of clicks per network.) |
 | `/upload-post:schedule-campaign` | Schedule a post across multiple platforms at once. Handles per-platform validation (aspect ratio, length, Facebook pages, Pinterest boards). |
 | `/upload-post:repurpose-video` | Take a long video, transcribe it, pick viral moments, cut clips with FFmpeg, optionally add hook overlays, then schedule to TikTok / Reels / Shorts. |
-| `/upload-post:posting-queue` | Set up a recurring weekly posting rhythm (slots, days, timezone) and see what lands in the next slot. |
+| `/upload-post:posting-queue` | Set up a recurring weekly posting rhythm (slots, days, timezone), find the best times to post per network and let the queue follow them (`slots: "auto"`), and see what lands in the next slot. |
 | `/upload-post:manage-comments` | Read, triage, reply to and moderate comments (and the replies under them) on Instagram / Facebook / YouTube / LinkedIn / TikTok / X / Threads / Bluesky, read and send Instagram and Bluesky DMs, plus Google Business reviews. |
 | `/upload-post:autodm-setup` | Build an Instagram comment-to-DM funnel: keyword trigger → private DM with up to 3 link buttons, on one post or on the whole account (every post, story replies, story mentions, keyword DMs). |
 | `/upload-post:analyze-performance` | Pull analytics across accounts, identify what is working, and propose concrete next moves. |
+| `/upload-post:manage-channels` | Edit, repost or forward live posts; run a Telegram chat and bot (members, invite links, topics, commands); read Bluesky profiles, search and notifications and keep drafts; Google Business posts, reviews, performance and location info. |
 
 ### Agents
 
@@ -47,7 +48,7 @@ More in [EXAMPLES.md](./EXAMPLES.md).
 
 ### MCP server
 
-The plugin wires the hosted Upload-Post MCP server (`https://mcp.upload-post.com/mcp`) into Claude. Its tools cover uploads (video / photo / text / documents), scheduling and the posting queue, analytics, comments and Google Business reviews, Instagram and Bluesky DMs, AutoDM monitors and account-wide rules, webhook delivery history and redelivery, LinkedIn mentions, FFmpeg encoding jobs, media staging, and account management. See the [MCP integration guide](https://docs.upload-post.com/guides/mcp-server-integration) for the full tool list.
+The plugin wires the hosted Upload-Post MCP server (`https://mcp.upload-post.com/mcp`) into Claude. Its tools cover uploads (video / photo / text / documents), scheduling and the posting queue, analytics, comments and Google Business reviews, Instagram and Bluesky DMs, AutoDM monitors and account-wide rules, webhook delivery history and redelivery, LinkedIn mentions, best times to post, editing and reposting live posts, Telegram chat and bot management, Bluesky reads and drafts, Google Business posts, reviews, performance and location info, FFmpeg encoding jobs, media staging, and account management. See the [MCP integration guide](https://docs.upload-post.com/guides/mcp-server-integration) for the full tool list.
 
 Authentication is OAuth 2.1 with dynamic client registration (RFC 7591) and PKCE — Claude registers itself, opens the approval page, and stores the token. Nothing to paste. Revoke any time from **Connected Apps** in the dashboard.
 
@@ -155,6 +156,7 @@ Grab a key at [app.upload-post.com/settings/api](https://app.upload-post.com/set
 /upload-post:repurpose-video           # turn a long video into shorts
 /upload-post:manage-comments           # reply to what came back
 /upload-post:autodm-setup              # capture leads from a hot post
+/upload-post:manage-channels           # fix a live post, run your Telegram chat, Bluesky or Google Business listing
 ```
 
 ## Troubleshooting

@@ -1,6 +1,6 @@
 ---
 name: posting-queue
-description: Configure and inspect the Upload-Post posting queue — the recurring time slots that queued content drips into. Use when the user wants a posting schedule or rhythm, asks when their next post goes out, wants to change posting times or days, or says they want to queue content instead of picking exact timestamps.
+description: Configure and inspect the Upload-Post posting queue — the recurring time slots that queued content drips into, fixed or filled automatically with the best times to post. Use when the user wants a posting schedule or rhythm, asks when their next post goes out or when the best time to post is, wants to change posting times or days, or says they want to queue content instead of picking exact timestamps.
 ---
 
 # Manage the posting queue
@@ -11,7 +11,7 @@ The queue is a recurring weekly grid of slots per profile. Anything uploaded wit
 
 Call `get_queue_settings` with `profile_username`. The schema marks it optional, but the API rejects the call with `400 profile_username is required` — always pass it. Get the name from `list_users` first if you do not have it.
 
-It returns `timezone`, `slots`, `days_of_week`, `max_posts_per_slot`, and `full_slots` (slots already at capacity).
+It returns `timezone`, `slots`, `days_of_week`, `max_posts_per_slot`, and `full_slots` (slots already at capacity). With automatic slots it also returns `slots_mode: "auto"`, `auto_slots` (the hours chosen from the best times), `effective_slots` (what the queue is filling right now) and `auto_slots_info` (when they were computed and the `source` / `confidence` of each network).
 
 Then call `preview_queue` (same `profile_username`) to show what is actually lined up. Pass `nextSlot: true` when the user only asks "when does my next post go out?" — it returns just `next_slot` with `datetime_utc`, `datetime_local` and `timezone`, instead of the whole grid. Quote the **local** time back to the user; the UTC field is for your own arithmetic.
 
@@ -35,11 +35,18 @@ Europe/Madrid · Mon–Fri
 
 **This call replaces the configuration wholesale** — it is marked destructive for a reason. Omitted fields are not merged with what was there. So: read the current settings, apply the user's change on top, describe the grid you are *about to* send in plain language, get a yes, and only then write. Changing slots re-times content that is already queued.
 
-## 3. Sensible defaults
+## 3. Best times and automatic slots
 
-If the user has no idea what to pick, do not invent a "best time to post" from thin air. Call `get_analytics` (and `get_total_impressions` for the headline) on the profile and derive slots from when their own audience actually engaged. Note that `get_platform_metrics` is *not* useful here — it takes no arguments and only lists which metric names exist per platform.
+If the user has no idea what to pick, do not invent a "best time to post" from thin air. Call `get_best_times` with `profile_username` and `platform` (TikTok, Instagram, Facebook, YouTube, LinkedIn, Threads, Pinterest or Bluesky), plus `timezone` so the hours come back in local time. It answers `best_times` (best first), `by_hour`, `by_day`, and says where they come from:
 
-Only fall back to generic advice (2 slots/day, late morning and early evening, weekdays) when there is not enough history — and say that is what you are doing.
+- `source: "audience_activity"` — the network reports when followers are online (TikTok Business, Instagram with 100+ followers).
+- `source: "account_posts"` — the account's own recent posts compared with its median post.
+- `source: "upload_post_history"` — posts published through Upload-Post.
+- `source: "none"` — not enough data yet; say so, and only then fall back to generic advice (2 slots/day, late morning and early evening, weekdays).
+
+Quote the `confidence` with the hours. `refresh: true` only recomputes an answer older than 24 hours (YouTube 7 days); otherwise the cached one comes back.
+
+To let the queue follow those hours by itself, call `update_queue_settings` with `slots: "auto"` (or `slots_mode: "auto"`), `auto_slots_count` (1-12 hours per day) and optionally `auto_platforms` (up to 6 networks; default every connected network with best times). The fixed `slots` stay stored as a fallback while there is no data, posts already scheduled do not move, and sending a `slots` array (or `slots_mode: "fixed"`) switches back. The same wholesale-replace rule applies: read first, describe, confirm.
 
 ## Handing off
 
