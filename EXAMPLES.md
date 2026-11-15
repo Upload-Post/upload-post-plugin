@@ -54,6 +54,38 @@ When does my next queued post go out?
 
 `preview_queue` with `nextSlot: true` — answers with the local time, not UTC.
 
+```text
+When should I post on Instagram and TikTok? Make my queue follow that.
+```
+
+`get_best_times` per network (hours, `source`, `confidence`), then `update_queue_settings` with `slots: "auto"` and `auto_platforms: ["instagram", "tiktok"]` after you confirm.
+
+## Live posts and channels
+
+```text
+Fix the typo in yesterday's Telegram post and pin it.
+```
+
+`/upload-post:manage-channels` — `edit_post` with `platform: "telegram"`, the new `text` and `telegram_action: "pin"`.
+
+```text
+Forward my last Telegram post to @my_other_channel.
+```
+
+`repost_post` with `mode: "forward"` and `target_chat_id`.
+
+```text
+How did my Google Business listing do last month, and update the opening hours for Christmas.
+```
+
+`google_business_read` with `action: "performance"`, then `update_google_business_location` with the special hours after you approve the change.
+
+```text
+This reel is a paid partnership with Acme.
+```
+
+`paidPartnership: true` in `platformOptions`; on Facebook it also asks for Acme's Page id (`facebookSponsorId`).
+
 ## Repurposing long video
 
 ```text

@@ -6,6 +6,23 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+## [0.6.0] — 2026-11-15
+
+Needs the Upload-Post MCP server release that adds `get_best_times`, `edit_post`, `repost_post`, `post_action`, the Telegram, Bluesky and Google Business tools and the new publishing options (0.24.0).
+
+### Added
+
+- `manage-channels` skill: edit, repost / forward and act on live posts (`edit_post`, `repost_post`, `post_action`); Telegram chat and bot (`manage_telegram_chat`, `manage_telegram_bot`); Bluesky reads, account and drafts (`bluesky_read`, `manage_bluesky_account`); Google Business posts, reviews, performance, gallery and location info (`google_business_read`, `update_google_business_location`, legacy / strict edit mode).
+- `posting-queue`: best times to post per network with `get_best_times` (`source`, `confidence`) and the automatic queue (`update_queue_settings` with `slots: "auto"`, `auto_slots_count`, `auto_platforms`).
+- `schedule-campaign`: sponsored posts (`paidPartnership`, `facebookSponsorId`), Telegram publishing options (buttons, pin, polls, locations, caption overflow, any file via `upload_document`), Bluesky extras (tags, thread overflow, captions), Google Business recurring posts, several photos and Google scheduling; `edit_post` / `repost_post` after publishing and Telegram `delete_all_messages`.
+- `analyze-performance`: Telegram analytics, Google Business performance and search keywords, best times.
+- `content-strategist` takes its publish times from `get_best_times`.
+- `FEATURES.md`, `README.md`, `EXAMPLES.md` and `GEMINI.md` updated.
+
+### Versions
+
+- Claude Code, Cursor, Grok and Gemini manifests 0.6.0. The ChatGPT/Codex package is unchanged (1.2.0): the new tools are not in ChatGPT's reviewed surface yet.
+
 ## [0.5.0] — 2026-11-14
 
 Needs the Upload-Post MCP server release that adds account-wide AutoDM rules, webhook delivery tools, Bluesky DMs and `resolve_linkedin_organization`.

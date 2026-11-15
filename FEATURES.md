@@ -18,9 +18,9 @@ Support differs per content type — a platform in the video column is not autom
 | Pinterest | ✅ | ✅ | — | ✅ |
 | Reddit | ⏸️ | ⏸️ | ⏸️ | ✅ |
 | Bluesky | ✅ | ✅ | ✅ | — |
-| Google Business | ✅ | ✅ | ✅ | — |
+| Google Business | ✅ | ✅ | ✅ | ✅ |
 | Discord | ✅ | ✅ | ✅ | — |
-| Telegram | ✅ | ✅ | ✅ | — |
+| Telegram | ✅ | ✅ | ✅ | ✅ |
 | Mastodon | ✅ | ✅ | ✅ | — |
 | WordPress | ✅ | ✅ | ✅ | — |
 | Lemmy | — | ✅ | ✅ | — |
@@ -33,7 +33,7 @@ Support differs per content type — a platform in the video column is not autom
 
 ⏸️ Reddit publishing is currently unavailable (`reddit_unavailable`) until the Reddit app is restored.
 
-**22 platforms** total: 15 accept video, 15 accept photos and carousels, 18 accept text, 9 report analytics. Documents (PDF carousels) are LinkedIn-only.
+**22 platforms** total: 15 accept video, 15 accept photos and carousels, 18 accept text, 11 report analytics. Documents (PDF carousels) are LinkedIn; Telegram takes any file (audio, voice, sticker, GIF) through `upload_document`. Google Business analytics come from its own performance metrics; Telegram reports subscribers, reactions and boosts (no views).
 
 ## Skills
 
@@ -41,11 +41,12 @@ Support differs per content type — a platform in the video column is not autom
 | :-- | :-- |
 | `setup` | OAuth onboarding, connection check, profile discovery |
 | `schedule-campaign` | Cross-platform publishing with per-platform validation and options |
-| `posting-queue` | Recurring weekly slots, timezone, next-slot preview |
+| `posting-queue` | Recurring weekly slots, timezone, next-slot preview, best times to post and automatic slots |
 | `repurpose-video` | Long video → transcript → viral moments → cut clips → scheduled shorts |
 | `manage-comments` | Read, triage, reply and moderate comments and their replies; Instagram and Bluesky DMs; Google Business reviews |
 | `autodm-setup` | Instagram comment-to-DM funnels: one post (monitor) or the whole account (rule: every post, story replies, story mentions, keyword DMs) |
 | `analyze-performance` | Analytics across accounts, interpreted, with a concrete next move |
+| `manage-channels` | Edit, repost and act on live posts; Telegram chat and bot; Bluesky reads and drafts; Google Business posts, reviews, performance and location info |
 | `whitelabel-connect` | JWT connection links so your clients OAuth into your workspace |
 
 ## Agents
@@ -60,11 +61,13 @@ Support differs per content type — a platform in the video column is not autom
 
 The MCP server groups its tools as follows (main ones).
 
-**Publishing** — `upload_video`, `upload_photos`, `upload_text`, `upload_document`. Each accepts a fixed schedule (`scheduledDate` + `timezone`), a queue append (`addToQueue`), or immediate publish, plus per-platform `platformOptions`.
+**Publishing** — `upload_video`, `upload_photos`, `upload_text`, `upload_document`. Each accepts a fixed schedule (`scheduledDate` + `timezone`), a queue append (`addToQueue`), or immediate publish, plus per-platform `platformOptions` (including `paidPartnership` / `facebookSponsorId` for sponsored posts and the Telegram, Bluesky and Google Business options).
 
-**Scheduling & queue** — `list_scheduled`, `edit_scheduled`, `cancel_scheduled`, `get_queue_settings`, `update_queue_settings`, `preview_queue`.
+**Scheduling & queue** — `list_scheduled`, `edit_scheduled`, `cancel_scheduled`, `get_queue_settings`, `update_queue_settings` (fixed slots or `slots: "auto"`), `preview_queue`, `get_best_times`.
 
-**Post lifecycle** — `get_status`, `get_job_status`, `get_history`, `get_media`, `retry_post`, `unpublish_post`.
+**Post lifecycle** — `get_status`, `get_job_status`, `get_history`, `get_media`, `retry_post`, `unpublish_post`, `edit_post`, `repost_post`, `post_action`.
+
+**Telegram, Bluesky and Google Business** — `manage_telegram_chat`, `manage_telegram_bot`, `bluesky_read`, `manage_bluesky_account`, `google_business_read`, `update_google_business_location` (an `action` plus `params` with the API's own field names).
 
 **Analytics** — `get_analytics`, `get_total_impressions`, `get_post_analytics`, `get_platform_metrics`, `get_reddit_detailed_posts`.
 
@@ -89,7 +92,9 @@ Worth knowing before you plan around them:
 - **Comments**: `reply_to_comment` (private DM to a commenter) and `public_reply_to_comment` are Instagram-only, and Instagram's private-reply window closes after 7 days. Replies under a comment can be read on Instagram, Facebook, LinkedIn Pages, TikTok, Threads and YouTube, not on X or Bluesky.
 - **`create_comment` on Instagram** accepts replies only, never top-level comments.
 - **`unpublish_post`** does not work on Instagram, TikTok or Threads; delete those in the native app.
+- **`edit_post`** works on Facebook, LinkedIn, X (Premium, edit window), Google Business and Telegram; Telegram bots can only delete messages for 48 hours.
+- **Bluesky**: likes, reposts, follows, lists and reports are not available; drafts are text only.
 - **AutoDM rules** are Instagram-only and run on Instagram webhooks: up to 10 per account, 25 DMs per account every 15 minutes plus the daily DM allowance.
 - **Bluesky DMs** need an app password created with "Allow access to your direct messages". Bluesky galleries take up to 10 images.
 - **`update_queue_settings`** replaces the configuration wholesale rather than merging.
-- **Analytics** cover 9 of the 22 platforms — the rest publish but do not report back.
+- **Analytics** cover 11 of the 22 platforms — the rest publish but do not report back.
