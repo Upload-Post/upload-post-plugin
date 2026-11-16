@@ -6,6 +6,20 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+## [0.7.0] — 2026-11-16
+
+Needs the Upload-Post MCP server release with the YouTube tools (0.25.0).
+
+### Added
+
+- `manage-youtube` skill: `youtube_read`, `manage_youtube_playlists`, `manage_youtube_comments`, `manage_youtube_channel`, `manage_youtube_videos`, `manage_youtube_live` — playlists, captions, comment inbox and moderation, channel settings, sections, banner and watermark, search, live broadcasts, streams and chat; the daily YouTube allowance and what costs most; `confirm` on destructive actions.
+- `youtubeLocalizations` and `youtubeBrandPartner` on `upload_video`; `edit_post` on YouTube videos.
+- `FEATURES.md`, `README.md`, `GEMINI.md` and `manage-channels` point to it.
+
+### Versions
+
+- Claude Code, Cursor, Grok and Gemini manifests 0.7.0. The ChatGPT/Codex package is unchanged (1.2.0).
+
 ## [0.6.0] — 2026-11-15
 
 Needs the Upload-Post MCP server release that adds `get_best_times`, `edit_post`, `repost_post`, `post_action`, the Telegram, Bluesky and Google Business tools and the new publishing options (0.24.0).
