@@ -35,6 +35,8 @@ These tools act on things that already exist: a post that is live, the Telegram 
 
 ## Handing off
 
+- YouTube playlists, captions, comments, channel and live → `/upload-post:manage-youtube`.
+
 - New content for any of these channels → `/upload-post:schedule-campaign`.
 - Replying to comments or reviews → `/upload-post:manage-comments`.
 - Numbers → `/upload-post:analyze-performance`.

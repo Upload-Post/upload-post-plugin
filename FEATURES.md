@@ -46,6 +46,7 @@ Support differs per content type — a platform in the video column is not autom
 | `manage-comments` | Read, triage, reply and moderate comments and their replies; Instagram and Bluesky DMs; Google Business reviews |
 | `autodm-setup` | Instagram comment-to-DM funnels: one post (monitor) or the whole account (rule: every post, story replies, story mentions, keyword DMs) |
 | `analyze-performance` | Analytics across accounts, interpreted, with a concrete next move |
+| `manage-youtube` | YouTube after publishing: playlists, captions, comment inbox and moderation, channel settings, search, live broadcasts and chat, daily allowance |
 | `manage-channels` | Edit, repost and act on live posts; Telegram chat and bot; Bluesky reads and drafts; Google Business posts, reviews, performance and location info |
 | `whitelabel-connect` | JWT connection links so your clients OAuth into your workspace |
 
@@ -66,6 +67,8 @@ The MCP server groups its tools as follows (main ones).
 **Scheduling & queue** — `list_scheduled`, `edit_scheduled`, `cancel_scheduled`, `get_queue_settings`, `update_queue_settings` (fixed slots or `slots: "auto"`), `preview_queue`, `get_best_times`.
 
 **Post lifecycle** — `get_status`, `get_job_status`, `get_history`, `get_media`, `retry_post`, `unpublish_post`, `edit_post`, `repost_post`, `post_action`.
+
+**YouTube** — `youtube_read`, `manage_youtube_playlists`, `manage_youtube_comments`, `manage_youtube_channel`, `manage_youtube_videos`, `manage_youtube_live` (`action` plus `params`); `edit_post` also edits YouTube videos and `upload_video` takes `youtubeLocalizations` / `youtubeBrandPartner`.
 
 **Telegram, Bluesky and Google Business** — `manage_telegram_chat`, `manage_telegram_bot`, `bluesky_read`, `manage_bluesky_account`, `google_business_read`, `update_google_business_location` (an `action` plus `params` with the API's own field names).
 
@@ -94,6 +97,7 @@ Worth knowing before you plan around them:
 - **`unpublish_post`** does not work on Instagram, TikTok or Threads; delete those in the native app.
 - **`edit_post`** works on Facebook, LinkedIn, X (Premium, edit window), Google Business and Telegram; Telegram bots can only delete messages for 48 hours.
 - **Bluesky**: likes, reposts, follows, lists and reports are not available; drafts are text only.
+- **YouTube management** shares a daily allowance per account (2,000 units on paid plans, 200 on free; searches 5 and 1 a day). Captions are the expensive calls; the free plan cannot upload or download them.
 - **AutoDM rules** are Instagram-only and run on Instagram webhooks: up to 10 per account, 25 DMs per account every 15 minutes plus the daily DM allowance.
 - **Bluesky DMs** need an app password created with "Allow access to your direct messages". Bluesky galleries take up to 10 images.
 - **`update_queue_settings`** replaces the configuration wholesale rather than merging.

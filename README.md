@@ -38,6 +38,7 @@ More in [EXAMPLES.md](./EXAMPLES.md).
 | `/upload-post:manage-comments` | Read, triage, reply to and moderate comments (and the replies under them) on Instagram / Facebook / YouTube / LinkedIn / TikTok / X / Threads / Bluesky, read and send Instagram and Bluesky DMs, plus Google Business reviews. |
 | `/upload-post:autodm-setup` | Build an Instagram comment-to-DM funnel: keyword trigger → private DM with up to 3 link buttons, on one post or on the whole account (every post, story replies, story mentions, keyword DMs). |
 | `/upload-post:analyze-performance` | Pull analytics across accounts, identify what is working, and propose concrete next moves. |
+| `/upload-post:manage-youtube` | Run your YouTube channel after publishing: playlists, captions, comment inbox and moderation, channel description and keywords, search, live broadcasts and chat, within the daily YouTube allowance. |
 | `/upload-post:manage-channels` | Edit, repost or forward live posts; run a Telegram chat and bot (members, invite links, topics, commands); read Bluesky profiles, search and notifications and keep drafts; Google Business posts, reviews, performance and location info. |
 
 ### Agents
@@ -48,7 +49,7 @@ More in [EXAMPLES.md](./EXAMPLES.md).
 
 ### MCP server
 
-The plugin wires the hosted Upload-Post MCP server (`https://mcp.upload-post.com/mcp`) into Claude. Its tools cover uploads (video / photo / text / documents), scheduling and the posting queue, analytics, comments and Google Business reviews, Instagram and Bluesky DMs, AutoDM monitors and account-wide rules, webhook delivery history and redelivery, LinkedIn mentions, best times to post, editing and reposting live posts, Telegram chat and bot management, Bluesky reads and drafts, Google Business posts, reviews, performance and location info, FFmpeg encoding jobs, media staging, and account management. See the [MCP integration guide](https://docs.upload-post.com/guides/mcp-server-integration) for the full tool list.
+The plugin wires the hosted Upload-Post MCP server (`https://mcp.upload-post.com/mcp`) into Claude. Its tools cover uploads (video / photo / text / documents), scheduling and the posting queue, analytics, comments and Google Business reviews, Instagram and Bluesky DMs, AutoDM monitors and account-wide rules, webhook delivery history and redelivery, LinkedIn mentions, best times to post, editing and reposting live posts, Telegram chat and bot management, Bluesky reads and drafts, Google Business posts, reviews, performance and location info, YouTube playlists, captions, comments, channel settings and live, FFmpeg encoding jobs, media staging, and account management. See the [MCP integration guide](https://docs.upload-post.com/guides/mcp-server-integration) for the full tool list.
 
 Authentication is OAuth 2.1 with dynamic client registration (RFC 7591) and PKCE — Claude registers itself, opens the approval page, and stores the token. Nothing to paste. Revoke any time from **Connected Apps** in the dashboard.
 
