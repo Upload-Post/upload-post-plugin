@@ -6,6 +6,14 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+Needs the Upload-Post MCP server release with the analytics freshness changes (0.26.0).
+
+### Changed
+
+- `analyze-performance`, `content-strategist`, `social-media-analytics`: headline number is `views_total`, not the legacy `total_impressions`; check `as_of`, `missing` and `coverage` before reporting; X and YouTube posts only update when read; no polling.
+- `analyze-performance` and `content-strategist` use `get_cached_post_analytics` with `sort`, `get_insights` and `get_analytics_status`. `FEATURES.md` and `GEMINI.md` list them.
+- The ChatGPT/Codex `social-media-analytics` skill only names tools ChatGPT already has (`views_total`, `as_of`), so its package can ship whenever.
+
 ## [0.7.0] — 2026-11-16
 
 Needs the Upload-Post MCP server release with the YouTube tools (0.25.0).

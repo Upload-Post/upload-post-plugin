@@ -72,7 +72,7 @@ The MCP server groups its tools as follows (main ones).
 
 **Telegram, Bluesky and Google Business** — `manage_telegram_chat`, `manage_telegram_bot`, `bluesky_read`, `manage_bluesky_account`, `google_business_read`, `update_google_business_location` (an `action` plus `params` with the API's own field names).
 
-**Analytics** — `get_analytics`, `get_total_impressions`, `get_post_analytics`, `get_platform_metrics`, `get_reddit_detailed_posts`.
+**Analytics** — `get_analytics` (`since` / `until` / `compare` for a period), `get_total_impressions` (`views_total`), `get_post_analytics` (`refresh`, `daily`), `get_cached_post_analytics` (`sort`, `origin`), `get_insights`, `get_analytics_status`, `get_platform_metrics`, `get_reddit_detailed_posts`. Every answer carries `as_of` / `next_refresh_at` and `missing` reasons.
 
 **Comments & reviews** — `get_post_comments` (replies with `commentId`), `create_comment`, `delete_comment`, `comment_action`, `public_reply_to_comment`, `reply_to_comment`, `get_google_business_reviews`, `reply_to_google_business_review`.
 

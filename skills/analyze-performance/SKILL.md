@@ -23,14 +23,18 @@ If the user is vague, default to: all connected accounts, last 28 days, engageme
 Call the analytics tools in parallel:
 
 - `get_analytics` with `profileUsername` — overall snapshot for the profile.
-- `get_total_impressions` with `profileUsername` — headline number across platforms.
+- `get_total_impressions` with `profileUsername` — headline number across platforms: use `views_total` (views only, comparable with the native apps), not `total_impressions` (a legacy mix of reach and impressions).
 - `get_platform_metrics` — per-platform breakdown for the workspace.
 - `get_post_analytics` with `requestId` — deep dive on a specific upload; or with `platformPostId` + `platform` + `user` for any post of the account (for example one from `get_media`). A TikTok draft has metrics only once the creator publishes it as public from the TikTok app; a draft published as private never gets per-post analytics.
+- `get_cached_post_analytics` with `user` and `sort: "-views"` — rank many posts at once without calling the networks (add `origin: "all"` for posts not published with Upload-Post).
+- `get_insights` with `user` — each post against the profile's other posts at the same age (1h, 24h, 7d, 30d) and what works by format, hour, weekday, hashtags and caption length. Treat `low_sample: true` as a hint; YouTube blocks are derived by Upload-Post, not YouTube metrics.
 - `get_history` — paginated log of what was actually published, and when. Use it to build the denominator (posting cadence) that the engagement numbers hang off.
 - `manage_autodms` with `action: "status"` and `user` — AutoDM counters, if any are running; `list_autodm_rules` for account-wide rules (`stats` per trigger).
 - Telegram: `get_analytics` with `telegram` returns subscribers or members, reactions (`engagement`/`likes`) and active boosts; the Bot API has no views, so do not promise reach. `manage_telegram_chat` with `action: "get_boosts"` details the boosts.
 - Google Business: `google_business_read` with `action: "performance"` (daily impressions, calls, website clicks, directions for `start_date`/`end_date`) and `action: "search_keywords"` (the monthly searches that showed the location).
 - When the question is *when* to post, `get_best_times` per network answers it with its `source` and `confidence`.
+
+Before the summary, check freshness: every block has `as_of` (when the network was asked). X and YouTube posts only update when someone reads them, and networks publish some numbers 24–72 h late, so a post from yesterday is not final. A metric listed in `missing` was not reported (say why; never treat it as 0). If something looks stuck or partial, `get_analytics_status` shows per account the last reading, the network delay and the `coverage` ("10 of 31" posts with metrics); say so instead of presenting partial totals as complete. Do not poll: ask again after `next_refresh_at`, and use `refresh: true` on `get_post_analytics` only when the user needs fresher numbers.
 
 For qualitative signal, `get_post_comments` on the top and bottom post is worth more than another metric: what people actually said explains the numbers.
 
