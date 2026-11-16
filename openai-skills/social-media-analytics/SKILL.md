@@ -14,9 +14,9 @@ Which networks, which profile, which period, which metric. If the user is vague:
 ## 2. Fetch
 
 - `get_analytics` with `profileUsername` (and `platforms`, `pageId` for a Facebook Page, `pageUrn` for a LinkedIn Page; LinkedIn analytics cover company Pages only). Instagram includes follower demographics.
-- `get_total_impressions` with `profileUsername` and a `period` (`last_week`, `last_month`, `last_3months`, …) for the headline number.
+- `get_total_impressions` with `profileUsername` and a `period` (`last_week`, `last_month`, `last_3months`, …) for the headline number: `views_total` (views only, comparable with the native apps), not `total_impressions` (a legacy mix of reach and impressions).
 - `get_history` for what was published and when (posting cadence).
-- Per post: `get_post_analytics` with `requestId`, or `platformPostId` + `platform` + `user` for any post of the account (live, limited to 100 calls per 5 minutes). A TikTok draft has metrics once it is published publicly from the TikTok app. When scanning many posts, prefer `get_cached_post_analytics` (`user`, `platform`).
+- Per post: `get_post_analytics` with `requestId`, or `platformPostId` + `platform` + `user` for any post of the account (limited to 100 calls per 5 minutes; `as_of` says when each number was read, and X and YouTube posts only update when someone reads them). A TikTok draft has metrics once it is published publicly from the TikTok app. When scanning many posts, prefer `get_cached_post_analytics` (`user`, `platform`).
 - TikTok audience and trends: `get_audience` and `get_suggestions` (`type` hashtags or keywords) with `platform: "tiktok"`; they depend on the account's `capabilities` in `list_users`.
 - Comments on the best and worst post (`get_post_comments`) often explain the numbers better than another metric.
 
