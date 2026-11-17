@@ -14,13 +14,14 @@ The server uses OAuth 2.1 with PKCE and dynamic client registration. On first us
 - After posting, check `get_status` or `get_history`. Uploads are asynchronous.
 - Scheduled posts: `list_scheduled`, `edit_scheduled`, `cancel_scheduled`. Queue: `get_queue_settings`, `update_queue_settings` (`slots: "auto"` follows the best times), `preview_queue`. Best hours per network: `get_best_times` (with `source` and `confidence`).
 - Live posts: `edit_post` (Facebook, LinkedIn, X, Google Business, Telegram), `repost_post` (LinkedIn, X, Threads, Telegram forward/copy), `post_action` (Bluesky bookmark/pin/reply and quote settings, Telegram reactions).
-- Telegram, Bluesky, Google Business: `manage_telegram_chat`, `manage_telegram_bot`, `bluesky_read`, `manage_bluesky_account`, `google_business_read`, `update_google_business_location` (an `action` plus `params` with the API's field names).
+- Telegram, Bluesky, Google Business: `manage_telegram_chat`, `manage_telegram_bot` (incoming updates, answers), `manage_telegram_payments`, `manage_telegram_business`, `bluesky_read`, `manage_bluesky_account`, `google_business_read`, `update_google_business_location` (an `action` plus `params` with the API's field names).
 - YouTube after publishing: `youtube_read`, `manage_youtube_playlists`, `manage_youtube_comments`, `manage_youtube_channel`, `manage_youtube_videos`, `manage_youtube_live`. They share a daily allowance (check `youtube_read` with `action: "quota"`); destructive actions need the API's `confirm: true`, set only after the user agrees.
 - Sponsored posts: `paidPartnership: true` in `platformOptions` (Facebook also needs `facebookSponsorId`).
 - Analytics: `get_analytics`, `get_post_analytics`, `get_total_impressions`, `get_platform_metrics`.
 - Comments and DMs: `get_post_comments` (`commentId` reads the replies under a comment), `create_comment`, `reply_to_comment`, `public_reply_to_comment`, `send_dm` and `list_dm_conversations` (Instagram and Bluesky), `manage_autodms` (one post), `create_autodm_rule` / `list_autodm_rules` / `pause_autodm_rule` / `resume_autodm_rule` / `delete_autodm_rule` (whole Instagram account).
 - LinkedIn mentions: `resolve_linkedin_organization` gives the exact name and urn for `@[Name](urn:li:organization:ID)`.
-- Webhooks: `list_webhook_deliveries`, `get_webhook_delivery`, `redeliver_webhook` (last 7 days).
+- Webhooks: `list_webhook_deliveries`, `get_webhook_delivery`, `redeliver_webhook` (last 7 days), `manage_webhook_settings`; webhook subscriptions (`list_webhook_subscriptions`, `create_webhook_subscription`, `delete_webhook_subscription`, `test_webhook_subscription`) are not generally available yet (503 `webhook_subscriptions_disabled`).
+- Team: `get_team_info` (roles, members, activity log). Approvals (not generally available yet, 503 `post_approvals_disabled`): `list_pending_approvals`, `approve_post` (pass the `version` the user reviewed), `reject_post` (with a `comment`), `edit_pending_post`, `withdraw_pending_post`. An Editor's upload returns `pending_approval: true`: it waits for a reviewer, it did not fail.
 
 ## Safety rules
 
@@ -31,6 +32,7 @@ The server uses OAuth 2.1 with PKCE and dynamic client registration. On first us
 - Edits, reposts, Telegram moderation and Google Business location edits change public things: confirm first, and set the API's `confirm: true` only after the user said yes. Never set `paidPartnership` unless the user says the post is sponsored.
 - Private replies to commenters are Instagram-only and only within 7 days. AutoDM rules and `redeliver_webhook` act on their own once called: confirm first.
 - Bluesky DMs need an app password with DM access (`403 bluesky_dm_scope_missing` otherwise). After `504 bluesky_send_unconfirmed` read the conversation before resending.
+- Never approve or reject a team member's post without the user's explicit decision on that post.
 - Never print or log API keys or JWTs. `generate_jwt` links let a third party connect accounts to a profile; share them only with the intended person.
 - Respect each platform's rules and the user's quota. If a tool returns a quota or token error, report it instead of retrying in a loop.
 

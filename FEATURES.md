@@ -49,6 +49,7 @@ Support differs per content type — a platform in the video column is not autom
 | `manage-youtube` | YouTube after publishing: playlists, captions, comment inbox and moderation, channel settings, search, live broadcasts and chat, daily allowance |
 | `manage-channels` | Edit, repost and act on live posts; Telegram chat and bot; Bluesky reads and drafts; Google Business posts, reviews, performance and location info |
 | `whitelabel-connect` | JWT connection links so your clients OAuth into your workspace |
+| `team-approvals` | Approve or reject team members' posts, team roles and activity log, webhook subscriptions (not generally available yet) |
 
 ## Agents
 
@@ -70,7 +71,7 @@ The MCP server groups its tools as follows (main ones).
 
 **YouTube** — `youtube_read`, `manage_youtube_playlists`, `manage_youtube_comments`, `manage_youtube_channel`, `manage_youtube_videos`, `manage_youtube_live` (`action` plus `params`); `edit_post` also edits YouTube videos and `upload_video` takes `youtubeLocalizations` / `youtubeBrandPartner`.
 
-**Telegram, Bluesky and Google Business** — `manage_telegram_chat`, `manage_telegram_bot`, `bluesky_read`, `manage_bluesky_account`, `google_business_read`, `update_google_business_location` (an `action` plus `params` with the API's own field names).
+**Telegram, Bluesky and Google Business** — `manage_telegram_chat`, `manage_telegram_bot` (also incoming updates and answers to button presses and queries), `manage_telegram_payments` (Stars, invoices, gifts), `manage_telegram_business`, `bluesky_read`, `manage_bluesky_account`, `google_business_read`, `update_google_business_location` (an `action` plus `params` with the API's own field names).
 
 **Analytics** — `get_analytics`, `get_total_impressions`, `get_post_analytics`, `get_platform_metrics`, `get_reddit_detailed_posts`.
 
@@ -78,11 +79,13 @@ The MCP server groups its tools as follows (main ones).
 
 **DMs & automation** — `send_dm`, `list_dm_conversations` (Instagram and Bluesky), `manage_autodms` (one post), `create_autodm_rule`, `list_autodm_rules`, `pause_autodm_rule`, `resume_autodm_rule`, `delete_autodm_rule` (whole Instagram account).
 
-**Webhooks** — `list_webhook_deliveries`, `get_webhook_delivery`, `redeliver_webhook`.
+**Webhooks** — `list_webhook_deliveries`, `get_webhook_delivery`, `redeliver_webhook`, `manage_webhook_settings` (account and per-profile webhook), and webhook subscriptions `list_webhook_subscriptions`, `create_webhook_subscription`, `delete_webhook_subscription`, `test_webhook_subscription` (not generally available yet).
+
+**Team and approvals** — `get_team_info` (roles, members, shared accounts, activity log), `list_pending_approvals`, `approve_post` (needs the item's `version`), `reject_post` (needs a `comment`), `edit_pending_post`, `withdraw_pending_post`. Approvals are not generally available yet.
 
 **Targets & destinations** — `get_facebook_pages`, `get_linkedin_pages`, `resolve_linkedin_organization` (urn and exact name for LinkedIn mentions), `get_pinterest_boards`, `get_google_business_locations`.
 
-**Profiles & white-label** — `list_users`, `create_user`, `delete_user`, `get_account_info`, `generate_jwt`, `validate_jwt`.
+**Profiles & white-label** — `list_users`, `create_user` (`409` when the username is already in use), `delete_user`, `get_account_info` (plan and the AI Shorts analyses left), `generate_jwt`, `validate_jwt`, `open_social_accounts` (a view to connect networks from the chat, in clients that support MCP Apps).
 
 **Media staging** — `create_media_upload`, `complete_media_upload`, `get_media_upload`, `delete_media_upload`, `open_upload_studio`.
 

@@ -66,7 +66,7 @@ Or drive it with the skill:
 | Symptom | Fix |
 | :-- | :-- |
 | No `upload-post` tools available | Not authenticated — `/mcp` → `upload-post` → **Authenticate** |
-| Every tool returns 401 | Token revoked or expired — re-authenticate. Check **Connected Apps** in the dashboard |
+| Every tool returns 401 | Token revoked or expired — re-authenticate. Check **AI Assistants (MCP)** in the dashboard |
 | OAuth tab never opens | Proxy or VPN. `curl -sI https://mcp.upload-post.com/.well-known/oauth-protected-resource` should return 200 |
 | `list_users` returns nothing | No profile yet — create one at [manage-users](https://app.upload-post.com/manage-users) |
 | A scheduled post never went out | That platform's token expired. Ask the `post-debugger` agent |

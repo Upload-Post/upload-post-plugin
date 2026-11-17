@@ -6,6 +6,26 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+## [0.8.0] — unreleased
+
+Needs the Upload-Post MCP server release with the team, approval, webhook subscription and Telegram payments/Business tools (MCP PR #44 and #45) and the backend release that ships them. Approvals and webhook subscriptions stay not generally available until they are switched on.
+
+### Added
+
+- `team-approvals` skill: `get_team_info` (roles, members, shared accounts, activity log), the approval queue (`list_pending_approvals`, `approve_post` with the reviewed `version`, `reject_post` with a comment, `edit_pending_post`, `withdraw_pending_post`), team permission errors and webhook subscriptions (`list_webhook_subscriptions`, `create_webhook_subscription`, `delete_webhook_subscription`, `test_webhook_subscription`).
+- `manage-channels`: Telegram incoming updates and answers (`set_updates`, `updates_status`, `answer_query`), `manage_telegram_payments`, `manage_telegram_business`, `telegram_allow_paid_broadcast` and `telegram_paid_broadcast_not_allowed`.
+- `whitelabel-connect`: `clientApproval` on `generate_jwt`; `create_user` 409.
+- `post-debugger`: pending approvals are not failures, team permission errors, paid broadcast refusal, disabled webhook subscriptions.
+- `FEATURES.md`, `GEMINI.md` and `README.md` list the new tools, `open_social_accounts`, the AI Shorts allowance in `get_account_info` and `manage_webhook_settings`.
+
+### Fixed
+
+- The dashboard page for OAuth connections is **AI Assistants (MCP)** (`/connected-apps`), and API keys live at `/api-keys`.
+
+### Versions
+
+- Claude Code, Cursor, Grok and Gemini manifests 0.8.0. The ChatGPT/Codex package is unchanged (1.2.0): ChatGPT does not see the new tools.
+
 ## [0.7.0] — 2026-11-16
 
 Needs the Upload-Post MCP server release with the YouTube tools (0.25.0).
