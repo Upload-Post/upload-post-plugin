@@ -36,6 +36,10 @@ For an account-wide rule, `list_autodm_rules`: `status: reconnect_required` or `
 ## Other errors worth recognising
 
 - `403 TEAM_SEAT_SUSPENDED` (acting on someone else's account as a team member): the owner's plan no longer covers this seat. Nothing is deleted; access returns when the owner upgrades or frees a seat.
+- `pending_approval: true` with an `approval_id` (an Editor's upload) or `approval_status: "draft"` (a Contributor's): not a failure, the post waits for the owner or an admin (`list_pending_approvals`). `403 team_role_forbidden`, `team_profile_forbidden`, `team_page_not_pinned` (no Facebook/LinkedIn Page pinned to that profile for the member) and `team_page_forbidden` are team permissions: the owner fixes them in the dashboard.
+- `telegram_paid_broadcast_not_allowed`: the bot does not meet Telegram's paid broadcast requirements (100,000 Stars and 100,000 monthly active users); send it again without `telegram_allow_paid_broadcast`.
+- `409 Username already in use` from `create_user`: that profile name exists (names are compared without case); pick another or use the existing profile.
+- A webhook subscription (`list_webhook_subscriptions`) with `status: disabled` stopped after repeated failures (`disabled_reason`); creating it again reactivates it.
 - Bluesky DMs: `403 bluesky_dm_scope_missing` → reconnect Bluesky with an app password created with "Allow access to your direct messages". `504 bluesky_send_unconfirmed` → the DM may have gone out; read the conversation, do not resend blindly.
 
 ## What to avoid

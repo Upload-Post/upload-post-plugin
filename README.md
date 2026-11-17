@@ -39,6 +39,7 @@ More in [EXAMPLES.md](./EXAMPLES.md).
 | `/upload-post:autodm-setup` | Build an Instagram comment-to-DM funnel: keyword trigger → private DM with up to 3 link buttons, on one post or on the whole account (every post, story replies, story mentions, keyword DMs). |
 | `/upload-post:analyze-performance` | Pull analytics across accounts, identify what is working, and propose concrete next moves. |
 | `/upload-post:manage-youtube` | Run your YouTube channel after publishing: playlists, captions, comment inbox and moderation, channel description and keywords, search, live broadcasts and chat, within the daily YouTube allowance. |
+| `/upload-post:team-approvals` | Review what team members sent for approval and approve, reject, edit or discard it; team roles, members and activity log; webhook subscriptions for integrations. Approvals and subscriptions are not generally available yet. |
 | `/upload-post:manage-channels` | Edit, repost or forward live posts; run a Telegram chat and bot (members, invite links, topics, commands); read Bluesky profiles, search and notifications and keep drafts; Google Business posts, reviews, performance and location info. |
 
 ### Agents
@@ -51,7 +52,7 @@ More in [EXAMPLES.md](./EXAMPLES.md).
 
 The plugin wires the hosted Upload-Post MCP server (`https://mcp.upload-post.com/mcp`) into Claude. Its tools cover uploads (video / photo / text / documents), scheduling and the posting queue, analytics, comments and Google Business reviews, Instagram and Bluesky DMs, AutoDM monitors and account-wide rules, webhook delivery history and redelivery, LinkedIn mentions, best times to post, editing and reposting live posts, Telegram chat and bot management, Bluesky reads and drafts, Google Business posts, reviews, performance and location info, YouTube playlists, captions, comments, channel settings and live, FFmpeg encoding jobs, media staging, and account management. See the [MCP integration guide](https://docs.upload-post.com/guides/mcp-server-integration) for the full tool list.
 
-Authentication is OAuth 2.1 with dynamic client registration (RFC 7591) and PKCE — Claude registers itself, opens the approval page, and stores the token. Nothing to paste. Revoke any time from **Connected Apps** in the dashboard.
+Authentication is OAuth 2.1 with dynamic client registration (RFC 7591) and PKCE — Claude registers itself, opens the approval page, and stores the token. Nothing to paste. Revoke any time from **AI Assistants (MCP)** in the dashboard ([app.upload-post.com/connected-apps](https://app.upload-post.com/connected-apps)).
 
 ## Why this plugin (vs. alternatives)
 
@@ -116,7 +117,7 @@ That's it — there is no API key to copy and no environment variable to export.
 <details>
 <summary>Prefer a long-lived API key (CI, headless, shared machines)?</summary>
 
-Grab a key at [app.upload-post.com/settings/api](https://app.upload-post.com/settings/api) and either send it as a header against the same hosted endpoint:
+Grab a key at [app.upload-post.com/api-keys](https://app.upload-post.com/api-keys) and either send it as a header against the same hosted endpoint:
 
 ```json
 {
@@ -165,7 +166,7 @@ Grab a key at [app.upload-post.com/settings/api](https://app.upload-post.com/set
 | Symptom | Likely cause | Fix |
 | :------ | :----------- | :-- |
 | No `upload-post` tools available | Not authenticated yet | Claude.ai / Cowork: Customize → Connectors → Upload-Post → **Connect**. Claude Code: `/mcp` → `upload-post` → **Authenticate** |
-| Every tool returns 401 | OAuth token revoked or expired | Reconnect as above. Check **Connected Apps** in the dashboard |
+| Every tool returns 401 | OAuth token revoked or expired | Reconnect as above. Check **AI Assistants (MCP)** in the dashboard |
 | OAuth browser tab never opens | Proxy or VPN blocking the host | `curl -sI https://mcp.upload-post.com/.well-known/oauth-protected-resource` should return 200 |
 | `list_users` returns empty | No social accounts linked yet | Ask Claude for a connection link, or connect them at [app.upload-post.com/manage-users](https://app.upload-post.com/manage-users) |
 | Upload fails with `quota_exceeded` | Free-plan daily limit hit | Wait until quota resets or upgrade |

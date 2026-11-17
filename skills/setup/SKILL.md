@@ -19,7 +19,7 @@ Call `get_account_info`. It is the cheapest call: it validates the session and r
   A browser tab opens on `app.upload-post.com`; they log in or sign up (free plan, no card) and approve. Then call `get_account_info` again.
 - **Network error**: a proxy or VPN may block `mcp.upload-post.com`.
 
-The user can revoke access at any time from **Connected Apps** in the Upload-Post dashboard.
+The user can revoke access at any time from **AI Assistants (MCP)** in the Upload-Post dashboard (app.upload-post.com/connected-apps).
 
 ## 2. Profiles and social accounts
 

@@ -27,7 +27,7 @@ Create a profile, click the platform, accept the OAuth prompt. A couple of click
 
 ### 1. Pick or create the profile
 
-Each connected account belongs to a profile (a `username` value inside your workspace). If the client does not have a profile yet, create one with `create_user`. Tell them this is the bucket their connected accounts will live in.
+Each connected account belongs to a profile (a `username` value inside your workspace). If the client does not have a profile yet, create one with `create_user` (`409 Username already in use` means that name exists: reuse it or pick another). Tell them this is the bucket their connected accounts will live in.
 
 ### 2. Generate the URL
 
@@ -38,6 +38,7 @@ Call `generate_jwt` with:
 - `redirectUrl` — where to send the client after they finish OAuth.
 - Optional: `logoImage`, `connectTitle`, `connectDescription` — branded copy on the connect page.
 - Optional: `showCalendar`, `readonlyCalendar` — embed the scheduler view too.
+- Optional: `clientApproval: true` — the client can approve or reject the posts your team members send for approval on this profile, from the same page (post approvals, not generally available yet). Send it on every link you generate: a link generated with `false` turns it off.
 
 The tool returns a one-time URL.
 
