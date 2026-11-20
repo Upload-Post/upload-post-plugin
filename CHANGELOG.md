@@ -6,6 +6,10 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+### Added
+
+- WhatsApp DMs: `manage-comments`, `FEATURES.md`, `GEMINI.md` and `README.md` cover reading WhatsApp chats with `list_dm_conversations` (`platform: "whatsapp"`), the 24-hour window and templates, and point sending to the REST API until `send_dm` accepts WhatsApp. Facebook Messenger is described as limited rollout (`403 messenger_not_enabled`).
+
 ## [0.8.0] — unreleased
 
 Needs the Upload-Post MCP server release with the team, approval, webhook subscription and Telegram payments/Business tools (MCP PR #44 and #45) and the backend release that ships them. Approvals and webhook subscriptions stay not generally available until they are switched on.

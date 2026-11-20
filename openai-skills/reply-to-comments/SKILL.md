@@ -1,6 +1,6 @@
 ---
 name: reply-to-comments
-description: Read, reply to, and moderate comments on Instagram, TikTok, YouTube, Facebook, LinkedIn, X, Threads and Bluesky posts, read the replies under a comment, read and send Instagram and Bluesky DMs, and reply to Google Business Profile reviews through Upload-Post. Use when the user asks about comments, wants to answer or hide comments, clean up spam, engage with their audience, or respond to reviews. For automatic keyword-triggered DMs use instagram-auto-dm.
+description: Read, reply to, and moderate comments on Instagram, TikTok, YouTube, Facebook, LinkedIn, X, Threads and Bluesky posts, read the replies under a comment, read and send Instagram and Bluesky DMs, read WhatsApp chats, and reply to Google Business Profile reviews through Upload-Post. Use when the user asks about comments, wants to answer or hide comments, clean up spam, engage with their audience, or respond to reviews. For automatic keyword-triggered DMs use instagram-auto-dm.
 ---
 
 # Reply to comments and reviews
@@ -28,8 +28,9 @@ Draft replies in the user's own voice and get approval before sending; they are 
 
 ## Direct messages (Instagram, Bluesky)
 
-- `list_dm_conversations` with `user` and `platform` (`instagram` or `bluesky`); Bluesky also takes `conversation_id`, `messages_cursor`, `status` (`request`/`accepted`) and `read_state: "unread"`.
+- `list_dm_conversations` with `user` and `platform` (`instagram`, `bluesky` or `whatsapp`); Bluesky also takes `conversation_id`, `messages_cursor`, `status` (`request`/`accepted`) and `read_state: "unread"`.
 - `send_dm` with `user`, `platform`, `recipient_id`, `message`. Bluesky: `recipient_id` is a handle, DID or profile link (or pass `conversation_id`), up to 1000 characters, optional `reply_to` and one shared post in `attachments`; `sender_action` for `mark_read`, `react`/`unreact` (one emoji), `delete`, `accept`, `mute`, `unmute`, `leave`.
+- WhatsApp (`platform: "whatsapp"`, messaging only, never a publishing destination): conversations since the number was connected, `participant_id` = phone number, `window_open_until` per chat. `send_dm` does not take WhatsApp yet; sending goes through the REST API (`POST /api/uploadposts/dms/send`, https://docs.upload-post.com/api/whatsapp-dms): free text within 24 hours of the person's last message, approved templates outside it. Facebook Messenger is in limited rollout (`403 messenger_not_enabled`): do not offer it as available.
 - Bluesky needs an app password created with "Allow access to your direct messages": on `403 bluesky_dm_scope_missing` tell the user to create one and reconnect Bluesky. On `504 bluesky_send_unconfirmed` read the conversation before sending again.
 
 Show the DM text and get approval before sending.

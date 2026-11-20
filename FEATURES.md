@@ -43,7 +43,7 @@ Support differs per content type — a platform in the video column is not autom
 | `schedule-campaign` | Cross-platform publishing with per-platform validation and options |
 | `posting-queue` | Recurring weekly slots, timezone, next-slot preview, best times to post and automatic slots |
 | `repurpose-video` | Long video → transcript → viral moments → cut clips → scheduled shorts |
-| `manage-comments` | Read, triage, reply and moderate comments and their replies; Instagram and Bluesky DMs; Google Business reviews |
+| `manage-comments` | Read, triage, reply and moderate comments and their replies; Instagram and Bluesky DMs; WhatsApp chats (read); Google Business reviews |
 | `autodm-setup` | Instagram comment-to-DM funnels: one post (monitor) or the whole account (rule: every post, story replies, story mentions, keyword DMs) |
 | `analyze-performance` | Analytics across accounts, interpreted, with a concrete next move |
 | `manage-youtube` | YouTube after publishing: playlists, captions, comment inbox and moderation, channel settings, search, live broadcasts and chat, daily allowance |
@@ -77,7 +77,7 @@ The MCP server groups its tools as follows (main ones).
 
 **Comments & reviews** — `get_post_comments` (replies with `commentId`), `create_comment`, `delete_comment`, `comment_action`, `public_reply_to_comment`, `reply_to_comment`, `get_google_business_reviews`, `reply_to_google_business_review`.
 
-**DMs & automation** — `send_dm`, `list_dm_conversations` (Instagram and Bluesky), `manage_autodms` (one post), `create_autodm_rule`, `list_autodm_rules`, `pause_autodm_rule`, `resume_autodm_rule`, `delete_autodm_rule` (whole Instagram account).
+**DMs & automation** — `send_dm` (Instagram and Bluesky), `list_dm_conversations` (Instagram, Bluesky and WhatsApp; Messenger in limited rollout), `manage_autodms` (one post), `create_autodm_rule`, `list_autodm_rules`, `pause_autodm_rule`, `resume_autodm_rule`, `delete_autodm_rule` (whole Instagram account).
 
 **Webhooks** — `list_webhook_deliveries`, `get_webhook_delivery`, `redeliver_webhook`, `manage_webhook_settings` (account and per-profile webhook), and webhook subscriptions `list_webhook_subscriptions`, `create_webhook_subscription`, `delete_webhook_subscription`, `test_webhook_subscription` (not generally available yet).
 
@@ -102,6 +102,7 @@ Worth knowing before you plan around them:
 - **Bluesky**: likes, reposts, follows, lists and reports are not available; drafts are text only.
 - **YouTube management** shares a daily allowance per account (2,000 units on paid plans, 200 on free; searches 5 and 1 a day). Captions are the expensive calls; the free plan cannot upload or download them.
 - **AutoDM rules** are Instagram-only and run on Instagram webhooks: up to 10 per account, 25 DMs per account every 15 minutes plus the daily DM allowance.
+- **WhatsApp** is a messaging channel, not a publishing destination: a WhatsApp Business number connected from the dashboard or the white-label connect page (Meta's Embedded Signup). `list_dm_conversations` reads its chats (since the number was connected, with `window_open_until`); sending WhatsApp messages and templates goes through the REST API (`POST /api/uploadposts/dms/send` with `platform: "whatsapp"`, https://docs.upload-post.com/api/whatsapp-dms) until `send_dm` takes it. Free text only within 24 hours of the person's last message, approved templates outside it. **Facebook Messenger** is in limited rollout: `403 messenger_not_enabled` without access.
 - **Bluesky DMs** need an app password created with "Allow access to your direct messages". Bluesky galleries take up to 10 images.
 - **`update_queue_settings`** replaces the configuration wholesale rather than merging.
 - **Analytics** cover 11 of the 22 platforms — the rest publish but do not report back.

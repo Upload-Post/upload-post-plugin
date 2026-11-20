@@ -35,7 +35,7 @@ More in [EXAMPLES.md](./EXAMPLES.md).
 | `/upload-post:schedule-campaign` | Schedule a post across multiple platforms at once. Handles per-platform validation (aspect ratio, length, Facebook pages, Pinterest boards). |
 | `/upload-post:repurpose-video` | Take a long video, transcribe it, pick viral moments, cut clips with FFmpeg, optionally add hook overlays, then schedule to TikTok / Reels / Shorts. |
 | `/upload-post:posting-queue` | Set up a recurring weekly posting rhythm (slots, days, timezone), find the best times to post per network and let the queue follow them (`slots: "auto"`), and see what lands in the next slot. |
-| `/upload-post:manage-comments` | Read, triage, reply to and moderate comments (and the replies under them) on Instagram / Facebook / YouTube / LinkedIn / TikTok / X / Threads / Bluesky, read and send Instagram and Bluesky DMs, plus Google Business reviews. |
+| `/upload-post:manage-comments` | Read, triage, reply to and moderate comments (and the replies under them) on Instagram / Facebook / YouTube / LinkedIn / TikTok / X / Threads / Bluesky, read and send Instagram and Bluesky DMs, read WhatsApp chats, plus Google Business reviews. |
 | `/upload-post:autodm-setup` | Build an Instagram comment-to-DM funnel: keyword trigger → private DM with up to 3 link buttons, on one post or on the whole account (every post, story replies, story mentions, keyword DMs). |
 | `/upload-post:analyze-performance` | Pull analytics across accounts, identify what is working, and propose concrete next moves. |
 | `/upload-post:manage-youtube` | Run your YouTube channel after publishing: playlists, captions, comment inbox and moderation, channel description and keywords, search, live broadcasts and chat, within the daily YouTube allowance. |

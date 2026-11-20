@@ -1,6 +1,6 @@
 ---
 name: manage-comments
-description: Read, reply to and moderate comments on published posts across Instagram, Facebook, YouTube, LinkedIn, TikTok, X, Threads and Bluesky, read the replies under a comment, read and send Instagram and Bluesky DMs, and reply to Google Business reviews. Use when the user asks about comments, replies, engagement in the comment section, moderating or deleting a comment, their DM inbox, answering a DM, or a Google Business review.
+description: Read, reply to and moderate comments on published posts across Instagram, Facebook, YouTube, LinkedIn, TikTok, X, Threads and Bluesky, read the replies under a comment, read and send Instagram and Bluesky DMs, read WhatsApp chats, and reply to Google Business reviews. Use when the user asks about comments, replies, engagement in the comment section, moderating or deleting a comment, their DM inbox, answering a DM, or a Google Business review.
 ---
 
 # Work the comment section
@@ -61,14 +61,17 @@ Reversible first: `comment_action` takes `user`, `platform`, `action`, and usual
 
 Permanent: `delete_comment` takes `user`, `platform` (instagram / facebook / youtube / linkedin / tiktok / x / bluesky — Threads cannot delete comments), `commentId`, and on LinkedIn also `postId` (the post urn). It is destructive and cannot be undone — always confirm the specific comment text with the user first, never delete on a general instruction like "clean up the spam" without listing what you are about to remove.
 
-## Direct messages (Instagram, Bluesky)
+## Direct messages (Instagram, Bluesky, WhatsApp)
 
-- Read: `list_dm_conversations` with `user` and `platform` (`instagram` or `bluesky`), optional `limit`, `cursor`, `since` (only conversations that changed), `participant_id` and `messages_limit`. Bluesky adds `conversation_id` + `messages_cursor` (older messages of one conversation), `status` (`request` / `accepted`) and `read_state: "unread"`; it returns at most 25 conversations per page and marks slow ones `messages_truncated: true`.
+- Read: `list_dm_conversations` with `user` and `platform` (`instagram`, `bluesky` or `whatsapp`), optional `limit`, `cursor`, `since` (only conversations that changed), `participant_id` and `messages_limit`. Bluesky adds `conversation_id` + `messages_cursor` (older messages of one conversation), `status` (`request` / `accepted`) and `read_state: "unread"`; it returns at most 25 conversations per page and marks slow ones `messages_truncated: true`.
 - Send: `send_dm` with `user`, `platform`, `recipient_id` and `message`.
   - Instagram: `recipient_id` is the person's Instagram id (from a comment or a conversation), the person must have written to the account in the last 24 hours, optional up to 3 link `buttons`.
   - Bluesky: `recipient_id` is a handle (`alice.bsky.social`), DID or profile link, or pass `conversation_id` instead (works for groups). Up to 1000 characters; links, #hashtags and up to 10 @mentions become clickable. Optional `reply_to` and one shared Bluesky post in `attachments` (`{type: "post", url}`); no images or files. `sender_action` without a message: `mark_read`, `react` / `unreact` (`message_id` + a single emoji in `reaction`), `delete` (only for this account), `accept` (a message request), `mute`, `unmute`, `leave`.
 - Bluesky needs the account connected with an app password created with **"Allow access to your direct messages"**. `403 bluesky_dm_scope_missing` means it was not: tell the user to create one in Bluesky (Settings > Privacy and security > App passwords) and reconnect Bluesky; do not retry.
 - `504 bluesky_send_unconfirmed` means the DM may have gone out. Read the conversation before sending anything again, and never retry it automatically. `403 bluesky_recipient_unavailable` (with `reason`) means the person does not accept DMs from this account.
+
+- WhatsApp (`platform: "whatsapp"`): the profile's own WhatsApp Business number, connected from the dashboard or the white-label connect page with Meta's Embedded Signup (WhatsApp is never a publishing destination). Conversations hold the messages since the number was connected (90 days); `participant_id` is the person's phone number and each chat has `window_open_until`. Received media come as `media_id`. `send_dm` does not take WhatsApp yet: send through the REST API (`POST /api/uploadposts/dms/send` with `platform: "whatsapp"`, https://docs.upload-post.com/api/whatsapp-dms) until `send_dm` takes it. Free text only within 24 hours of the person's last message; outside it only an approved template (`whatsapp_template_required`). Meta bills conversations to the user's WhatsApp Business account.
+- Facebook Messenger (`platform: "facebook"`) is in limited rollout: an account without access gets `403 messenger_not_enabled`, and no plan, setting or reconnect changes that; the user can ask Upload-Post support for access. Do not offer it as available.
 
 DMs are private but still sent as the user: show the text and get approval before sending, especially in bulk.
 
